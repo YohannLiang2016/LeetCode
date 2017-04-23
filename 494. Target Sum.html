@@ -1,0 +1,33 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @param {number} S
+ * @return {number}
+ * 思路：
+ * https://discuss.leetcode.com/topic/76243/java-15-ms-c-3-ms-o-ns-iterative-dp-solution-using-subset-sum-with-explanation
+ * 然后转化为最基础的背包问题
+ * 很清楚！http://love-oriented.com/pack/P01.html
+ * 在这里dp[j][k]指的是前j个之中数字之和恰好等于k的种类数量
+ * 则dp[j][k] = dp[j][k-nums[j]](选第j个) + dp[j-1][k]（不选）
+ * 优化后 dp[k] += dp[k-nums[j]]
+ */
+var sumofrightsubset =  function(aryofnum, targetsum) {
+	var dp = Array(targetsum + 1).fill(0);
+	dp[0] = 1;
+	for(var j = 0; j < aryofnum.length; j++) {
+		for(var k = targetsum; k >= aryofnum[j]; k--) {
+			dp[k] += dp[k-aryofnum[j]];
+		}
+	}
+	return dp[targetsum];
+}
+var findTargetSumWays = function(nums, S) {
+    var sum = 0;
+    var numslength = nums.length;
+    for(var i = 0; i < numslength; i++) {
+    	sum += nums[i];
+    }
+    return (sum < S || (sum + S) % 2 > 0) ? 0:sumofrightsubset(nums,(sum + S) / 2);
+};    
+
+</script>

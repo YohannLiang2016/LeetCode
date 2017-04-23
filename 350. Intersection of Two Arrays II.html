@@ -1,0 +1,25 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+    var nums1length = nums1.length;
+    var nums2length = nums2.length;
+    var nums1map = {};
+    var resultary = [];
+    for(var i = 0; i < nums1length; i++)
+    	if(typeof nums1map[nums1[i]] === 'undefined')
+    		nums1map[nums1[i]] = 1;
+    	else
+    		nums1map[nums1[i]]++;
+
+    for(var j = 0; j < nums2length; j++) {
+    	if(typeof nums1map[nums2[j]] !== 'undefined' && nums1map[nums2[j]] > 0)
+    		resultary.push(nums2[j]);
+    		nums1map[nums2[j]]--;
+    }
+    return resultary;    
+};
+</script>

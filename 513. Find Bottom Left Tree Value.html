@@ -1,0 +1,44 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var findBottomLeftValue = function(root) {
+    function findfuc(r) {
+    	if(r.left === null && r.right === null)
+    		return [r.val, 1];
+    	var leftaryOfHeightAndValue;
+    	var rightaryOfHeightAndValue;
+    	if(r.left === null){
+    		rightaryOfHeightAndValue = findfuc(r.right);
+    		rightaryOfHeightAndValue[1] = rightaryOfHeightAndValue + 1;
+    		return rightaryOfHeightAndValue;
+    	}
+    	if(r.right === null) {
+    		leftaryOfHeightAndValue = findfuc(r.left);
+    		leftaryOfHeightAndValue[1] = leftaryOfHeightAndValue[1] + 1;
+    		return leftaryOfHeightAndValue;
+    	}
+    	leftaryOfHeightAndValue = findfuc(r.left);
+    	rightaryOfHeightAndValue = findfuc(r.right);
+    	if(leftaryOfHeightAndValue[1] < rightaryOfHeightAndValue[1]){
+    	    rightaryOfHeightAndValue[1] = rightaryOfHeightAndValue[1] + 1;
+    		return rightaryOfHeightAndValue;
+    	}
+    	else{
+    	    leftaryOfHeightAndValue[1] = leftaryOfHeightAndValue[1] + 1;
+    		return leftaryOfHeightAndValue;
+    	}
+    }
+    var aryofresult = findfuc(root);
+    return aryofresult[0];   
+};
+console.log(findBottomLeftValue([1,2,3,4,null,5,6,null,null,7]));
+</script>

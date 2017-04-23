@@ -1,0 +1,29 @@
+<script>
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+var canConstruct = function(ransomNote, magazine) {
+    var ransomNoteCount = {};
+    var ransomNotelength = ransomNote.length;
+    var magazinelength = magazine.length;
+    for(var i = 0; i < ransomNotelength; i++) {
+    	if(typeof ransomNoteCount[ransomNote[i]] === 'undefined')
+    		ransomNoteCount[ransomNote[i]] = 1;
+    	else
+    		ransomNoteCount[ransomNote[i]]++;
+    }
+    for(var j = 0; j < magazinelength; j++) {
+    	if(typeof ransomNoteCount[magazine[j]] !== 'undefined')
+    		ransomNoteCount[magazine[j]]--;
+    }
+    for(var k = 0; k < ransomNotelength; k++){
+    	if(ransomNoteCount[ransomNote[k]] > 0)
+    		return false;
+    }
+    return true;
+};
+console.log(canConstruct("bg",
+"efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj"));
+</script>

@@ -1,0 +1,27 @@
+<script type="text/javascript">
+/**
+ * @param {number[][]} points
+ * @return {number}
+ * 思路：
+ * 虽然想到贪心，但是没想到要先排序
+ */
+var findMinArrowShots = function(points) {
+	if(points.length === 0);
+	point.sort(function(a, b) {
+		return a[0] - b[0];
+	});
+	var curlimit = points[0][1]; 
+	var result = 0;
+	var pointslength = points.length;
+	for(var i = 1; i < pointslength; i++) {
+		var curpoint = points[i];
+		if(curpoint[0] <= curlimit) {
+			curlimit = Math.min(curpoint[1], curlimit);
+		}else {
+			result++;
+			curlimit = curpoint[1];
+		}
+	}
+	return result;
+};
+</script>

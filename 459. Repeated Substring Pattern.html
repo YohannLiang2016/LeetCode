@@ -1,0 +1,22 @@
+<script type="text/javascript">
+/**
+ * 利用子串必须是父串的整除
+ * @param {string} s
+ * @return {boolean}
+ */
+var repeatedSubstringPattern = function(s) {
+    for(var i = Math.floor(s.length / 2); i > 0; i--) {
+    	if(s.length % i === 0) {
+    		var compareString = s.substr(0, i);
+    		var j = i;
+    		for(; j < s.length; j += i) {
+    			if(compareString.localeCompare(s.substr(j, i)) !== 0) break;
+    		}
+    		if(j === s.length) {
+    			return true;
+    		}
+    	}
+    }
+    return false;
+};
+</script>

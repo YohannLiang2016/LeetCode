@@ -1,0 +1,21 @@
+<script type="text/javascript">
+/**
+ * @param {number} num
+ * @return {string}
+ * 二进制取位用与
+ */
+var toHex = function(num) {
+  if(num === 0) return '0';
+  var hexchar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+  var map = new Map();
+  for(var i = 0; i < 16; i++) {
+  	map.set(i, hexchar[i]);
+  } 
+  var result = ''; 
+  while(num !== 0 && result.length < 8) { //小于8是因为负数的话会无线循环
+  	result = map.get((num & 15)) + result;
+  	num = num >> 4; 
+  }
+  return result;
+};
+</script>

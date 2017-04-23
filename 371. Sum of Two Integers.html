@@ -1,0 +1,31 @@
+<script>
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ * 思路：
+ * 就是加法器，列出式子即可
+ * xi = ai ^ bi ^ carry
+ * 进位 (((ai ^ bi) & carry) | (ai & bi)) << 1
+ */
+var getSum = function(a, b) {
+    var mask = 1;
+    var ai = 0;
+    var bi = 0;
+    var sum = 0;
+    var carry = 0;
+    for(var i = 0; i < 32; i++) {
+    	ai = a & mask;
+    	bi = b & mask;
+    	//console.log("ai"+ai+"bi"+bi);
+    	xi = ai ^ bi ^ carry;
+    	console.log("xi "+xi);
+    	carry = (((ai ^ bi) & carry) | (ai & bi)) << 1;
+    	sum = sum | xi;
+    	//console.log("sum"+sum);
+    	mask = mask << 1;
+    }
+    return sum;
+};
+console.log(getSum(20, 30));
+</script>

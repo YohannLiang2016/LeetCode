@@ -1,0 +1,22 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number}
+ * 别人总会总结规律https://discuss.leetcode.com/topic/59293/java-easiest-solution-o-logn-with-explanation
+ */
+var lastRemaining = function(n) {
+	var left = true;
+	var remaining = n;
+	var step = 1;
+	var head = 1;
+	while(remaining > 1) {
+		if(left || remaining % 2 === 1) {
+			head = head + step;
+		}
+		remaining = Math.floor(remaining / 2);
+		step = step * 2;
+		left = !left;
+	}
+	return head;
+};
+</script>

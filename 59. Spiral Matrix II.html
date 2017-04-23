@@ -1,0 +1,43 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number[][]}
+ * 详情看54
+ */
+var generateMatrix = function(n) {
+   if(n === 0) return [];
+    var colStart = 0,
+    	colEnd = n - 1,
+    	rowStart = 0，
+    	rowEnd = n - 1;
+    var matrix = [];
+    for(var m = 0; m < n; m++) {
+    	matrix.push([]);
+    }
+    var count = 1;
+    while(true) {
+    	//to right
+    	if(rowStart > rowEnd) break;
+    	for(var i = colStart; i <= colEnd; i++) {
+    		matrix[rowStart][i] = count++;
+    	}
+    	rowStart++;
+    	if(colStart > colEnd) break;
+    	for(var j = rowStart; j <= rowEnd; j++) {
+    		matrix[j][colEnd] = count++;
+    	}
+    	colEnd--;
+    	if(rowStart > rowEnd) break;
+    	for(var k = colEnd; k >= colStart; k--) {
+    		matrix[rowEnd][k] = count++;
+    	}
+    	rowEnd--;
+    	if(colStart > colEnd) break;
+    	for(var l = rowEnd; l >= rowStart; l--) {
+    		matrix[l][colStart] = count++;
+    	}
+    	colStart++;
+    } 
+    return matrix;  
+};
+</script>

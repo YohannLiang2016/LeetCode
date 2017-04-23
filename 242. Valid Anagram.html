@@ -1,0 +1,28 @@
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    if (s === null && t === null) return true;
+    if(s === null || t === null) return false;
+    var slength = s.length;
+    var tlength = t.length;
+    if(slength !== tlength) return false;
+    var map = [];
+    for(var i = 0; i < slength; i++) {
+        if(typeof map[s[i]] === 'undefined') {
+            map[s[i]] = 1;
+        }else {
+            map[s[i]]++;
+        }
+    }
+    for(var j = 0; j < tlength; j++) {
+        if(typeof map[t[j]] === 'undefined') return false;
+        map[t[j]]--;
+        if(map[t[j]] < 0) return false;
+    }
+    return true;
+};
+</script>

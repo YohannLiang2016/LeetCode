@@ -1,0 +1,27 @@
+<script>
+/**
+ * @param {number[]} g
+ * @param {number[]} s
+ * @return {number}
+ * 思路：
+ * 先排序，然后用指针
+ */
+var findContentChildren = function(g, s) {
+	g.sort((a, b)=>a-b);
+	s.sort((a, b)=>a-b);
+	console.log(g);
+	console.log(s);
+	var slength = s.length;
+	var glength = g.length;
+	var gpoint = 0;
+	var flag = 0;
+	for(var i = 0; i < slength && gpoint < glength; i++) {
+		if(s[i] >= g[gpoint]){
+			gpoint++;
+		}
+	}
+	return gpoint;
+};
+console.log(findContentChildren([250,490,328,149,495,325,314,360,333,418,430,458],
+[376,71,228,110,215,410,363,135,508,268,494,288,24,362,20,5,247,118,152,393,458,354,201,188,425,167,220,114,148,43,403,385,512,45]));
+</script>

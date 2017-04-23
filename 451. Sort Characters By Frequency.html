@@ -1,0 +1,51 @@
+<script>
+/**
+ * @param {string} s
+ * @return {string}
+ * 思路：
+ * 按照频率排序
+ * 1、先用hashmap来统计各个字母出现次数
+ * 2、不用O(nlogn)的排序方法，而用桶排序，即次数当作下标(实现，数组+集合(集合数组))。
+ * 备注
+ * 没想出
+ * 1、typeof map[i] === 'undefined'可以看出这个到底有没有初定义
+ * 2、javascript有集合的定义Set：var s = new Set()
+ *    添加s.add(..)
+ *    遍历for(let item of s){...}
+ * http://www.cnblogs.com/yangecnu/p/Introduce-Hashtable.html
+ * 值得注意的是hashmap的访问耗时是O(logn)
+ */
+var frequencySort = function(s) {
+	var map = {};
+	var slength = s.length;
+	for(var i = 0; i < slength; i++) {
+		if(typeof map[s[i]] != 'undefined'){
+			map[s[i]]++;
+		}else {
+			map[s[i]]=0;
+		}
+	}
+	var ary = [];
+	for(var i = 0; i < slength; i++) {
+		if(typeof ary[map[s[i]]] == 'undefined') 
+			ary[map[s[i]]] = new Set();
+		ary[map[s[i]]].add(s[i]);
+	}
+	var arylength = ary.length;
+	console.log(arylength);
+	var result = "";
+	for(var j = arylength-1; j >= 0; j--) {
+		console.log("now ary is"+ary[j]);
+		if(typeof ary[j] != 'undefined') {
+			for(let item of ary[j]) {
+				for(var k = 0; k <= j; k++) {
+					result += item;
+					console.log(item);
+				}
+			}
+		}
+	}
+	return result;
+};
+console.log(frequencySort("cccaaa"));
+</script>

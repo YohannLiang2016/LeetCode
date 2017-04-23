@@ -1,0 +1,29 @@
+<script type="text/javascript">
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+	if(head === null) return null;
+	var preVal = head.val;
+	var preNode = head;
+	temp = head.next;
+	while(temp !== null) {
+		if(preVal === temp.val) {
+			preNode.next = temp.next;
+		}else {
+			preVal = temp.val;
+			preNode = temp;
+		}
+		temp = temp.next;
+	}
+
+};
+</script>

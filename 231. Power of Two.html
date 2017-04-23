@@ -1,0 +1,11 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {boolean}
+ * 当n的位串表达开头为1其余为0时候，那么怎么得到开头只为1呢，...N&N-1..
+ */
+var isPowerOfTwo = function(n) {
+  if(n <= 0) return false;
+  return !(n&n-1);   
+};
+</script>

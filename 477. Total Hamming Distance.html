@@ -1,0 +1,33 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 思路：
+ * 想不出网上：https://discuss.leetcode.com/topic/72099/share-my-o-n-c-bitwise-solution-with-thinking-process-and-explanation/6
+ * cool and great!
+ * 我们想一下整体来看：先看最后一bit，假设有n个0和m个1，那么结果增加多少呢？n * m!!!!
+ * 解法就出来了，最多的时间复杂度是 nums中最大值k的logk+1<32所以是O(n)
+ * 答案写法也很巧妙
+ * 1、如何通过求余来得到二进制 （十进制转换为n进制） 2、如何递归这些数，数变成0的个数！
+ */
+var totalHammingDistance = function(nums) {
+    var numslength = nums.length;
+    var numsofzeroandone = [0, 0];
+    var numsofbecomezero = 0;
+    var result = 0;
+    while(true) {
+    	numsofbecomezero = 0;
+    	for(var i = 0; i < numslength; i++) {
+    		if(nums[i] === 0) {
+    			numsofbecomezero++;
+    		}
+    		numsofzeroandone[nums[i] % 2]++;
+    		nums[i] = nums[i] >> 1;
+    	}
+    	result += numsofzeroandone[0] * numsofbecomezero[1];
+    	numsofzeroandone[0] = 0;
+    	numsofzeroandone[1] = 0;
+    	if(numsofbecomezero === numslength) return result;
+    }
+};
+</script>

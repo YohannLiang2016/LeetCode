@@ -1,0 +1,38 @@
+<script>
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+var hammingDistance = function(x, y) {
+	var numberofDifferentBits = 0;
+	var xRemainder = 0;
+	var yRemainder = 0;
+	var xnow = x;
+	var ynow = y;
+    while(xnow >= 1 && ynow >= 1) {
+    		xRemainder = xnow % 2;
+    		yRemainder = ynow % 2;
+    		xnow = Math.floor(xnow / 2);
+    		ynow = Math.floor(ynow / 2);
+    		if(xRemainder != yRemainder)
+    				numberofDifferentBits += 1;
+    }
+    if(xnow < 1) {
+    	while(ynow >= 1) {
+    		if((ynow % 2) === 1)
+    				numberofDifferentBits += 1;
+    		ynow = Math.floor(ynow / 2);
+    	}
+    }else {
+    	while(xnow >= 1) {
+    		if((xnow % 2) === 1){
+     				numberofDifferentBits += 1;   		
+     			}
+    		xnow = Math.floor(xnow / 2)
+    	}
+    }
+    return numberofDifferentBits;
+};
+console.log(hammingDistance(3, 1))
+</script>

@@ -1,0 +1,60 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findPeakElement = function(nums) {
+	if(num[0] > num[1]) return 0;
+	var l = 1;
+	var n = nums.length;
+	while(l !== n - 1) {
+		if(nums[l] < nums[l + 1]) {
+			l = l + 1;
+		}else {
+			return l;
+		}
+	}
+	return n - 1;   
+};
+/*
+This problem is similar to Local Minimum. And according to the given condition, num[i] != num[i+1], there must exist a O(logN) solution. So we use binary search for this problem.
+
+If num[i-1] < num[i] > num[i+1], then num[i] is peak(为什么呢？因为假设num[i+1]>num[i+2],则i+1,如果不是则num[i+2]>nums[i+1],则假设nums[i+3]>nums[i+2],则i+3即结果，如果不是则,,,递归，因为最后nums[n]=-无穷，所以肯定有peak!)
+If num[i-1] < num[i] < num[i+1], then num[i+1...n-1] must contains a peak
+If num[i-1] > num[i] > num[i+1], then num[0...i-1] must contains a peak
+If num[i-1] > num[i] < num[i+1], then both sides have peak
+(n is num.length)
+Here is the code
+
+public int findPeakElement(int[] num) {    
+    return helper(num,0,num.length-1);
+}
+
+public int helper(int[] num,int start,int end){
+    if(start == end){
+        return start;
+    }else if(start+1 == end){
+        if(num[start] > num[end]) return start;
+        return end;
+    }else{
+        
+        int m = (start+end)/2;
+        
+        if(num[m] > num[m-1] && num[m] > num[m+1]){
+
+            return m;
+
+        }else if(num[m-1] > num[m] && num[m] > num[m+1]){
+
+            return helper(num,start,m-1);
+
+        }else{
+
+            return helper(num,m+1,end);
+
+        }
+        
+    }
+}
+*/
+</script>

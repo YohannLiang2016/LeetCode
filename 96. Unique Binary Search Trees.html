@@ -1,0 +1,20 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number}
+ *https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
+ * 竟然通过推导得出递推公式
+ * 难点在于怎么想出f(i,n)组合成结果g(i)
+ */
+var numTrees = function(n) {
+	var result = 0;
+	var g = [1, 1];
+	for(var i = 2; i <= n; i++) {
+		g[i] = 0;
+		for(var j = 0; j < i; j++) {
+			g[i] += g[j] * g[i - j - 1];
+		}
+	}  
+	return g[n];
+};
+</script>

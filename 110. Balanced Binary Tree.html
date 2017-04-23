@@ -1,0 +1,75 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ //[1,2,2,3,3,null,null,4,4]解法不行：，删掉map吧，只能是O(n* logN)
+//   function TreeNode(val) {
+//       this.val = val;
+//       this.left = this.right = null;
+//   }
+// var map = new Map();
+// function helper(root) {
+//     	if(root === null) return 0;
+//     	if(map.has(root.val)) return map.get(root.val);
+//     	var leftHeight = arguments.callee(root.left);
+//     	var rightHeight = arguments.callee(root.right);
+//     	if(leftHeight > rightHeight){
+//     	    console.log(root.val + "leftHeight" + rightHeight + 1);
+//     		map.set(root.val, leftHeight + 1);
+//     		return leftHeight + 1;
+//     	}
+//     	else{
+//     	    console.log(root.val + "rightHeight" + rightHeight + 1);
+//     		map.set(root.val, rightHeight + 1);
+//     		return rightHeight + 1;
+//     	}
+// }
+// var isBalanced = function(root) {
+// 	var i = 0;
+// 	if(root === null) return true;
+// 	if(!arguments.callee(root.left)) return false;
+// 	if(!arguments.callee(root.right)) return false;
+//     var left = helper(root.left);
+//     var right = helper(root.right);
+//     if(Math.abs(left - right) <= 1){
+//     	console.log(left + " "+ right);
+//     	return true;
+//     }
+//     return false;
+// };	
+
+// var a = new TreeNode(1);
+// a.right = new TreeNode(2);
+// a.right.right = new TreeNode(3);
+//上面解法去掉map即可
+//第二个解法：
+//混合？？当depth中的树不平衡返回-1，否则返回高度
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+var isBalanced = function(root) {
+   function helper(root) {
+   	if(root === null) return 0;
+   	var leftHeight = arguments.callee(root.left);
+   	if(leftHeight === -1) return -1;
+   	var rightHeight = arguments.callee(root.right);
+   	if(rightHeight === -1) return -1;
+   	if(Math.abs(leftHeight - rightHeight) <= -1) return Math.max(leftHeight, rightHeight) + 1;
+   	return -1;
+   } 
+   return helper(root) === -1;
+};
+</script>

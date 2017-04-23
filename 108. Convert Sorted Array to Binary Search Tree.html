@@ -1,0 +1,33 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ * 就是递归建树
+ */
+   function TreeNode(val) {
+      this.val = val;
+      this.left = this.right = null;
+  }
+var sortedArrayToBST = function(nums) {
+  function helper(nums, l, h) {
+  	if(l === h) {
+  		return new TreeNode(nums[l]);
+  	}
+  	if(l > h)
+  		return null;
+  	var mid = Math.floor((l + h) / 2);
+  	var rootnode = new TreeNode(nums[mid]);
+  	rootnode.left = arguments.callee(nums, l, mid - 1);
+  	rootnode.right = arguments.callee(nums, mid + 1, h);
+  	return rootnode;
+  }  
+  return helper(nums, 0, nums.length - 1);
+};
+</script>

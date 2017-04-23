@@ -1,0 +1,60 @@
+<script type="text/javascript">
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ * 思路非常非常简单，但是实现起来各种坑
+ * 有序号倒置，有忘了最后的一位亦可能是进位即可能超出最长数的位数
+ * 思路不简单，注释掉的程序是不能通过的，javascript整数最大值为2^53，超过这个数的话，加减乘除有问题
+ */
+var addStrings = function(num1, num2) {
+    // var short = num1.length>num2.length?num2:num1;
+    // var long = num1.length>num2.length?num1:num2;
+    // var shortlength = short.length;
+    // var longlength = long.length;
+    // var x = 0;
+    // var y = 0;
+    // var carry = 0;
+    // var result = 0;
+    // for(var i = 0; i < shortlength; i++) {
+    // 	x = short[shortlength- 1 - i] - '0';
+    // 	y = long[longlength - 1 - i] - '0';
+    // 	result += ((x + y + carry) % 10) * Math.pow(10, i);
+    // 	    	carry = Math.floor((x + y + carry) / 10);
+    // }
+    // for(var j = shortlength; j < longlength; j++) {
+    // 	y = long[longlength - 1 - j] - '0';
+    // 	console.log(((y + carry) % 10) * Math.pow(10, j) );
+    // 	result += ((y+carry) % 10) * Math.pow(10, j);
+    // 	carry = Math.floor((y + carry) / 10);
+    // }
+    // if(carry !== 0) {
+    // 	result += carry * Math.pow(10, longlength);
+    // }
+    // return result.toString();
+    var short = num1.length>num2.length?num2:num1;
+    var long = num1.length>num2.length?num1:num2;
+    var shortlength = short.length;
+    var longlength = long.length;
+    var x = 0;
+    var y = 0;
+    var carry = 0;
+    var result = [];
+    for(var i = 0; i < shortlength; i++) {
+    	x = short[shortlength- 1 - i] - '0';
+    	y = long[longlength - 1 - i] - '0';
+    	result.unshift((x + y + carry) % 10);
+    	carry = Math.floor((x + y + carry) / 10);
+    }
+    for(var j = shortlength; j < longlength; j++) {
+    	y = long[longlength - 1 - j] - '0';
+    	result.unshift((y+carry) % 10);
+    	carry = Math.floor((y + carry) / 10);
+    }
+    if(carry !== 0) {
+    	result.unshift(carry);
+    }
+    return result.join('');
+
+};
+</script>

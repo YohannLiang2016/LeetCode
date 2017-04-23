@@ -1,0 +1,24 @@
+<script>
+/**
+ * @param {number[]} timeSeries
+ * @param {number} duration
+ * @return {number}
+ * 思路：
+ * 总时间=时间点长度*监狱时间-无效时间(wasteTime)
+ * 无效时间求法:无效时间+=当次无效时间
+ * 当次无效时间=(监狱时间-(本次攻击时间-上次攻击时间))>0?监狱时间-(本次攻击时间-上次攻击时间):0
+ */
+var findPoisonedDuration = function(timeSeries, duration) {
+    var timeSerieslength = timeSeries.length;
+    var lasttime = timeSeries[0];
+    var sumofWastTime = 0;
+    var wastTime = 0;
+    for(var i = 1; i < timeSerieslength; i++) {
+    		wastTime = duration - (timeSeries[i] - lasttime);
+    		sumofWastTime += (wastTime > 0)?wastTime:0;
+    		lasttime = timeSeries[i];
+    }
+    return timeSerieslength*duration - sumofWastTime ;
+};
+console.log(findPoisonedDuration([1,4], 2));
+</script>

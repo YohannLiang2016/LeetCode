@@ -1,0 +1,48 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * 思路：
+ * 交换i与0 ~ i的数
+ * 理由：
+ * 对于i位置来说：
+ * 本来在i位置的数x,还在i位置可能性是1/i+1(即index === i+1)
+ * 对于i前面任意数y，在i位置可能性为=x换位可能性*y在index出可能性= ？？？？？为什么乘这个，不是应该乘抽中index概率吗？？*1/j
+ * 唉，反正随机调乱数组就是这个算法！
+ */
+var Solution = function(nums) {
+    this.nums = nums;
+};
+
+/**
+ * Resets the array to its original configuration and return it.
+ * @return {number[]}
+ */
+Solution.prototype.reset = function() {
+    return this.nums;
+};
+
+/**
+ * Returns a random shuffling of the array.
+ * @return {number[]}
+ */
+Solution.prototype.shuffle = function() {
+	if(this.nums === null) return null;
+	var numslength = this.nums.length;
+	var index;
+	var temp;
+	var a = (this.nums).map(val => val);
+    for(var i = 1; i < numslength; i++) {
+    	index = Math.floor(Math.random() * (i + 1));
+    	temp = a[i];
+    	a[i] = a[index];
+    	a[index] = temp;
+    }
+    return a;
+};
+/** 
+ * Your Solution object will be instantiated and called as such:
+ * var obj = Object.create(Solution).createNew(nums)
+ * var param_1 = obj.reset()
+ * var param_2 = obj.shuffle()
+ */
+ </script>

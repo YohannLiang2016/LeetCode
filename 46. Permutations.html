@@ -1,0 +1,41 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+	if(nums.length === 1) {
+		var temp1 = [];
+		temp1.push(nums);
+		return temp1;
+	}
+	if(nums.length === 0) return [].push(nums);
+    var result = [];
+    var rightResult = arguments.callee(nums.slice(1));
+    for(var i = 0; i < rightResult.length; i++) {
+    	rightResult[i].push(nums[0]);
+    	var temp = rightResult[i].slice();
+    	result.push(temp);
+    	rightResult[i].pop();
+    	rightResult[i].unshift(nums[0])
+    	result.push(rightResult[i]);
+    }
+    return result;
+	// if(nums.length === 1) {
+	// 	var temp1 = [];
+	// 	temp1.push(nums);
+	// 	return temp1;
+	// }
+	// if(nums.length === 0) return [].push(nums);
+ //    var result = [];
+ //    var rightResult = arguments.callee(nums.slice(1));
+ //    for(var i = 0; i < rightResult.length; i++) {
+ //    	rightResult[i].push(nums[0])
+ //    	result.push(rightResult);
+ //    	rightResult[i].pop();
+ //    	rightResult[i].unshift(nums[0])
+ //    	result.push(rightResult);
+ //    }
+ //    return result;
+};
+</script>

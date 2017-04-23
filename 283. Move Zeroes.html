@@ -1,0 +1,30 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ * 思路：
+ * 建立两个指针，一个指向非法的数字（0/已经换到前面的数字），一个指向合法数字（没被换到前面的数字&&非0）
+ * 1、扫描一遍
+ * 2、从非法数字指针开始填充0
+ */
+var moveZeroes = function(nums) {
+    var numslength = nums.length;
+    var movepoint = 0;
+    var pointtoinvaild = 0;
+    var numbersofzero = 0;
+    while(pointtoinvaild != numslength && nums[pointtoinvaild] !== 0) pointtoinvaild++;
+    if(pointtoinvaild !== numslength) {
+    movepoint = pointtoinvaild + 1;
+    for(var i = movepoint; i < numslength; i++) {
+    	if(nums[i] !== 0) {
+    		nums[pointtoinvaild] = nums[i];
+    		pointtoinvaild++;
+    	}
+    }
+    for(var j = pointtoinvaild; j < numslength; j++) {
+    	nums[j] = 0;
+    }
+    }
+};
+console.log(moveZeroes([1]));
+</script>

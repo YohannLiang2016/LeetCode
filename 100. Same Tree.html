@@ -1,0 +1,33 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ * 思路：
+ * 就是递归
+ */
+
+/**
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {boolean}
+ */
+var isSameTree = function(p, q) {
+    if(p === null && q === null) return true;
+    if((p === null && q !== null) ||(p !== null && q === null))
+        return false;
+    if(p.val !== q.val)
+        return false;
+    if(arguments.callee(p.left, q.left))
+        return arguments.callee(p.right, q.right);
+    else
+        return false;    
+
+    
+};
+</script>
+
+
+76 

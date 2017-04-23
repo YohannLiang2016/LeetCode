@@ -1,0 +1,29 @@
+<script type="text/javascript">
+/**
+ * @param {number} num
+ * @return {string[]}
+ * 思路：
+ * 循环12*60次...
+ * 
+ * 值得注意的是怎么格式化
+ * 和数1的个数
+ */
+var readBinaryWatch = function(num) {
+	var result = [];
+	function countonebit(n) {
+		return n.toString(2).split("1").length - 1;
+	}
+	function pad(n, width, z) {
+ 		z = z || '0';
+ 		n = n + '';
+  		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+	}
+    for(var i = 0; i < 12; i++) {
+    	for(var j = 0; j < 60; j++) {
+    		if(countonebit(i) + countonebit(j) === num)
+    			result.push(i + ":" + pad(j, 2));
+    	}
+    }
+    return result;
+};
+</script>

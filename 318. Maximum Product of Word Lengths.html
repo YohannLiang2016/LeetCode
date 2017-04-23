@@ -1,0 +1,32 @@
+<script type="text/javascript">
+/**
+ * @param {string[]} words
+ * @return {number}
+ * 思路：
+ * 原本的想法是用map记录a,b,c,d...对应的单词下标
+ * 然后遍历，用二维数组记录下标和其没有重复的字母
+ * 网上的方法更直接
+ * 用一个数组就可以记录下所有单词的组成，一个项对应一个单词，一个bit对应一个字母，然后用与
+ * !!!!&!!!优先级很低
+ */
+var maxProduct = function(words) {
+    var wordslength = words.length;
+    var wordcode = [];
+    for(var i = 0; i < wordslength; i++) {
+    	wordcode[i] = 0;
+    	var word = words[i];
+    	for(var j = 0; j < word.length; j++) {
+    		wordcode[i] |= (1<<(word.charCodeAt(j) - 97));
+    	}
+    }
+    var result = 0;
+    for(var m = 0; m < wordslength; m++) {
+    	for(var n = m + 1; n < wordslength; n++) {
+    		if((wordcode[m] & wordcode[n]) === 0 && words[m].length * words[n].length > result) {
+    			result = words[m].length * words[n].length;
+    		}
+    	}
+    }
+    return result;
+};
+</script>

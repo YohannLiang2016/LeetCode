@@ -1,0 +1,12 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number}
+ * 只思考到了，因式分解成两个数，然后数多少次。
+ * 网上是说因为因式分解只能成双出现，因此，一般的数都会灭，特别平方根为整数的才能不灭，如36因为有6*6
+ * 答案是Math.floor(sqrt(n))是因为总共有1，2，3...Math.floor(sqrt(n))个平方根
+ */
+var bulbSwitch = function(n) {
+    return  Math.floor(Math.sqrt(n));
+};
+</script>

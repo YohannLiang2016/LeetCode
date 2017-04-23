@@ -1,0 +1,19 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchInsert = function(nums, target) {
+	var l = -1;
+	var h = nums.length;
+	var mid;
+	while(l + 1 !== h) {
+		mid = Math.floor((h + l) / 2);
+		if(nums[mid] === target) return mid;
+		if(nums[mid] > target) h = mid;
+		if(nums[mid] < target) l = mid;
+	}  
+	return h;
+};
+</script>

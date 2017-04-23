@@ -1,0 +1,57 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 思路：
+ * 是对的（过不了，转成c++可以过）
+ * 把这次取不取传到下一个节点处，由下一个节点决定要不要取自己
+ * 加了map之后就过了！！！
+ * 怎样思考加map？
+ * 我们来看计算arguments(root.left, false) 要计算arguments(root.left.left, false) + argments.callee(root.left.right, false)
+ * arguments.callee(root.right, true)、arguments.callee(root.left, true)
+ * 其中arguments.callee(root.left, true)里面要计算arguments(root.left.left, false) + argments.callee(root.left.right, false)，因此，就重复了，我们可以用map来装重复的arguments(root.left.left, false) + argments.callee(root.left.right, false)减少重复计算
+ * 没加map版本
+ * 	var map = new Map();
+    function helper(root, isRob) {
+    	if(root === null) return 0;
+    	var notrob = arguments.callee(root.left, false) + arguments.callee(root.right, false);
+    	if(isRob) {
+    		return notrob;
+    	} else{
+    		var robthis = root.val + arguments.callee(root.right, true) + arguments.callee(root.left, true);
+    		return notrob > robthis? notrob:robthis;
+    	}
+    }
+    return helper(root, false);
+ * 网上的答案也值得一看：它的递归函数意义是在root可选可不选的情况下返回最大值，我的递归函数就有两层含义了。
+ * 网上第三个版本的函数意义是，同时返回下一个点选和不选的值，很聪明！
+
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var rob = function(root) {
+	var map = new Map();
+    function helper(root, isRob) {
+    	if(root === null) return 0;
+    	var notrob;
+    	if(map.has(root)) 
+    		notrob = map.get(root);
+    	else{
+    		notrob = arguments.callee(root.left, false) + arguments.callee(root.right, false);
+    		map.set(root, notrob);
+    	}
+    	if(isRob) {
+    		return notrob;
+    	} else{
+    		var robthis = root.val + arguments.callee(root.right, true) + arguments.callee(root.left, true);
+    		return notrob > robthis? notrob:robthis;
+    	}
+    }
+    return helper(root, false);
+};
+</script>

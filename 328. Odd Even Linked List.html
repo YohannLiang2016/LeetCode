@@ -1,0 +1,37 @@
+<script type="text/javascript">
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * 思路：
+ * 不难，一次过
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var oddEvenList = function(head) {
+	if(head === null || head.next === null || head.next.next === null) return head;
+	var second = head.next;
+	var temp = head;
+	var tempnext = head.next;
+	var count = 0;
+	while(temp !== null) {
+		tempnext = temp.next;
+		if(tempnext !== null) temp.next = tempnext.next;
+		count++;
+		if(count%2 === 1 && temp.next === null){
+			temp.next = second;
+		}
+		temp = tempnext;
+	}
+	temp = head;
+	while(temp !== null) {
+		console.log(temp);
+		temp = temp.next;
+	}  
+	return head;
+};
+</script>

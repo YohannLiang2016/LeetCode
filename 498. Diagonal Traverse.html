@@ -1,0 +1,66 @@
+<script>
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var findDiagonalOrder = function(matrix) {
+	if(matrix.length === 0) return [];
+	var height = matrix.length - 1;
+	var width = matrix[0].length - 1;
+	var heightRange = 0;
+	var widthRange = 0;
+	var heightPoint = 0;
+	var widthPoint = 0;
+	var diagonalOrder = [];
+	var downOrUp = 0;
+	var flag = 0;
+	while(heightPoint !== height || widthPoint !== width) {
+		if(flag++ === 200) break;
+		console.log(diagonalOrder);
+		console.log(heightPoint + ", " + widthPoint);
+		console.log(heightRange + "# " + widthRange);
+		if(downOrUp) {
+			//降
+			downOrUp = 0;
+			while(heightPoint <= heightRange){
+				console.log("a"+matrix[heightPoint][widthPoint])
+				diagonalOrder.push(matrix[heightPoint++][widthPoint--]);
+			}
+			if(heightRange !== height){
+				widthPoint = 0;
+				//heightPoint = 0;
+			}else {
+				heightPoint = height;
+				widthPoint += 2;
+			}
+		}else {
+			//升
+			downOrUp = 1;
+			while(widthPoint <= widthRange){
+				console.log("b"+matrix[heightPoint][widthPoint])
+				diagonalOrder.push(matrix[heightPoint--][widthPoint++]);
+			}
+			if(widthRange !== width){
+				heightPoint = 0;
+				//widthPoint = 0;
+			}
+			else{
+				widthPoint = width;
+				heightPoint += 2;
+			}
+		}
+
+		if(heightRange !== height) 
+		{
+			heightRange++;
+		}
+		if(widthRange !== width) 
+		{
+			widthRange++;
+		}
+	}
+	diagonalOrder.push(matrix[height][width]);
+	return diagonalOrder;
+};
+console.log(findDiagonalOrder([]));
+</script>

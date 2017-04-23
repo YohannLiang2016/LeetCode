@@ -1,0 +1,57 @@
+<script>
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ * 思路：
+ * 1、很直观，测量上下左右
+ * 2、测量下右邻居，结果=陆地总数*4-邻居*2
+ */
+var islandPerimeter = function(grid) {
+    // var gridlength = grid.length;
+    // var inlength = 0;
+    // var perimeterOfIsland = 0;
+    // for(var i = 0; i < gridlength; i++) {
+    //     inlength = grid[i].length;
+    //     for(var j = 0; j < inlength; j++) {
+    //         if(grid[i][j] === 1) {
+    //             //上
+    //             if(i === 0 || grid[i-1][j] !== 1) 
+    //                 perimeterOfIsland++; 
+    //             //下
+    //             if(i === gridlength-1 || grid[i+1][j] !== 1)
+    //                 perimeterOfIsland++;
+    //             //左
+    //             if(j === 0 || grid[i][j-1] !== 1)
+    //                 perimeterOfIsland++;
+    //             //右
+    //             if(j === inlength-1 || grid[i][j+1] !== 1)
+    //                 perimeterOfIsland++;
+    //         }
+    //     }
+    // }
+    // return perimeterOfIsland;
+    var gridlength = grid.length;
+    var inlength = 0;
+    var neighbours = 0;
+    var perimeterOfIsland = 0;
+    for(var i = 0; i < gridlength; i++) {
+        inlength = grid[i].length;
+        for(var j = 0; j < inlength; j++) {
+            if(grid[i][j] === 1) {
+                //下
+                if(i < gridlength-1 && grid[i+1][j] === 1)
+                    neighbours++;
+                //右
+                if(j < inlength-1 && grid[i][j+1] === 1)
+                    neighbours++;
+                perimeterOfIsland++;
+            }
+        }
+    }
+    return perimeterOfIsland * 4 - neighbours * 2;
+};
+console.log(islandPerimeter([[0,1,0,0],
+ [1,1,1,0],
+ [0,1,0,0],
+ [1,1,0,0]]))
+</script>

@@ -1,0 +1,47 @@
+<script>
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var magicalString = function(n) {
+	if(n == 1 || n == 2 || n == 3) return 1;
+	var magicalstring = '122';
+	var pOcurrence = 2;
+	var numsOfOne = 1;
+	var i = 0;
+	var nextChar = 2;
+	while(magicalstring.length < n) {
+		nextChar = i % 2 + 1;
+		i++;
+		if(magicalstring[pOcurrence++] === '1') {
+			magicalstring += nextChar.toString();
+			if(nextChar == 1) numsOfOne++;
+			// if(lastnum === 1){
+			// 	magicalstring += '2';
+			// 	lastnum = 2;
+			// }
+			// else{
+			// 	magicalstring += '1'; 
+			// 		numsOfOne++;
+			// 		lastnum = 1;
+			// 	}
+		} else{
+			magicalstring += nextChar.toString() + nextChar.toString();
+			if(nextChar == 1) numsOfOne += 2;
+			// if(lastnum == 1){
+			// 	magicalstring += '22';
+			// 	lastnum = 12;
+			// }
+			// else{
+			// 		magicalstring += '11'; 
+			// 		numsOfOne += 2;
+			// 		lastnum = 1;			
+			// 	}
+		}
+	}
+	if(magicalstring.length === n + 1 && magicalstring[magicalstring.length - 1] === '1') numsOfOne--;
+	//console.log(magicalstring);
+	return numsOfOne;
+};
+console.log(magicalString(100000));
+</script>

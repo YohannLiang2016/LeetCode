@@ -1,0 +1,17 @@
+<script>
+/**
+ * @param {string} s
+ * @return {number}
+ * 思路：
+ * 就是26进制
+ */
+var titleToNumber = function(s) {
+    var slength = s.length;
+    var column = 0;
+    for(var i = slength - 1; i >= 0; i--) {
+    	column += (Math.pow(26 , slength - i - 1) * (s.charCodeAt(i) - 64));
+    }
+    return column;
+};
+console.log(titleToNumber("BA"));
+</script>

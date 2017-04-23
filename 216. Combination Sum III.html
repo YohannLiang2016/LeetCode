@@ -1,0 +1,42 @@
+<script type="text/javascript">
+/**
+ * @param {number} k
+ * @param {number} n
+ * @return {number[][]}
+ * 思路：
+ * 自己做得回溯法，这种填字问题最适合用这些方法
+ * 1.while(l >= 0){ //根
+ * 2.while(当本点还在范围内(如这里的小于9)) {
+ * 3.本节点取下一个值
+ * 4.是否剪枝，是，break
+ * 5.是否是答案，是，处理，break；
+ * 6.是否是可能答案，是，l = l+1 且初始化下一个点的值 //前进！！！下一个点
+ * }
+ * 7.l = l - 1回退！！！
+ * {
+ * 七步曲
+ */
+var combinationSum3 = function(k, n) {
+  var result = [];
+  var resultitem = Array.apply(null, Array(k)).map(Number.prototype.valueOf,0);
+  l = 0;
+  while(l >= 0) {                                   
+  	while(resultitem[l] < 9) {
+  		resultitem[l] += 1;
+  		if(resultitem.reduce((pre, val)=>pre+val, 0) > n) break; //加了这一句从8%升到49%
+  		if(k - 1 === l && resultitem.reduce((pre, val)=>pre+val, 0) === n) {
+  			result.push(resultitem.slice());
+  			break;
+  		}else {
+  			if(k - 1 > l && resultitem.reduce((pre, val)=>pre+val, 0) < n) {
+  				l = l + 1;
+  				resultitem[l] = resultitem[l-1];
+  			}
+  		}
+  	}
+  	resultitem[l] = 0; //防止14行 加法算了后面
+  	l = l - 1;
+  }
+  return result;
+};
+</script>

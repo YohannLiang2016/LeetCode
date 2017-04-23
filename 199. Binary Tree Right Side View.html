@@ -1,0 +1,28 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 就是中-右-左遍历
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var rightSideView = function(root) {
+  maxHeight = 0;
+  var result = [];
+  function rootleftright(root, height) {
+  	if(root === null) return;
+  	if(maxHeight < height + 1) {
+  		maxHeight++;
+  		result.push(root.val);
+  	}
+  	arguments.callee(root.right, height + 1);
+  	arguments.callee(root.left, height + 1);
+  }  
+  return result;
+};
+</script>

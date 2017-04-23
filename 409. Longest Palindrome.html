@@ -1,0 +1,32 @@
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var longestPalindrome = function(s) {
+    if(s === 'null') return 0;
+    var slength = s.length;
+    var map = []
+    for(var i = 0; i < slength; i++) {
+        if(typeof map[s[i]] === 'undefined') {
+            map[s[i]] = 1;
+        }else {
+            map[s[i]]++;
+        }
+    }
+    var result = 0;
+    for(var j = 0; j < slength; j++) {
+            if(map[s[j]] >= 2) {
+                result += Math.floor(map[s[j]] / 2);
+                map[s[j]] = map[s[j]] % 2;
+            }
+    }
+    var flag = 0;
+    for(var k = 0; k < slength; k++) {
+    	if(map[s[k]] >= 1) {
+    		flag = 1;
+    	}
+    }
+    return result * 2 + flag;
+};	
+</script>

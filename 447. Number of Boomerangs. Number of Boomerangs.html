@@ -1,0 +1,35 @@
+<script type="text/javascript">
+/**
+ * @param {number[][]} points
+ * @return {number}
+ * 思路：
+ * 用map！来按距离存。
+ * 循环每一个！然后每一个A!/(A-2)!排列组合累加
+ */
+var numberOfBoomerangs = function(points) {
+	function getdistance(p, q) {
+		var dx = p[0] - q[0];
+		var dy = p[1] - q[1];
+		return dx * dx + dy * dy;
+	}
+    var pointslength = points.length;
+    var distancemap = new Map();
+    var result = 0;
+    for(var i = 0; i < pointslength; i++) {
+    	for(var j = 0; j < pointslength; j++) {
+    		if(i === j) continue;
+    		var distance = getdistance(points[i],points[j]);
+    		if(distancemap.has(distance)) {
+    			distancemap.set(distance, distancemap.get(distance) + 1);
+    		}else {
+    			distancemap.set(distance, 1);
+    		}
+    	}
+    	for(var value of distancemap.values()) {
+    		result += value * (value - 1);
+    	}
+    	distancemap.clear();
+    }
+    return result;
+};
+</script>

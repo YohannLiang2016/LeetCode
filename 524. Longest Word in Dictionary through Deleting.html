@@ -1,0 +1,25 @@
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @param {string[]} d
+ * @return {string}
+ */
+var findLongestWord = function(s, d) {
+    var dlength = d.length;
+    var slength = s.length;
+    var result = "";
+    for(var i = 0; i < dlength; i++) {
+    	var k = 0;
+    	var word = d[i];
+    	for(var j = 0; j < slength; j++) {
+    		if(s[j] === word[k]) k++; 
+    	}
+    	if(k === word.length && word.length >= result.length) {
+    		if(word.length > result.length || word.localeCompare(result) === -1) {
+    			result = word;
+    		}
+    	}
+    }
+    return result;
+};
+</script>

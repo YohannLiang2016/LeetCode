@@ -1,0 +1,29 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ * 思路：
+ * 就是很简单的交换...
+ * 备注：
+ * 题目里竟然写了：
+ * Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t    
+ * invert a binary tree on a whiteboard so fuck off.
+ * 白板编程没写出反转二叉树，Homebrew 作者Max Howell被谷歌拒掉了
+ */
+var invertTree = function(root) {
+	    if(root==null) return null;
+	    var temp = root.left;
+	    root.left = root.right;
+	    root.right = temp;
+	    arguments.callee(root.left);
+	    arguments.callee(root.right);
+	    return root;
+};
+</script>

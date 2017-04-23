@@ -1,0 +1,40 @@
+<script type="text/javascript">
+/**
+ * @param {string[]} strs
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ * dp[m][n][j] = max{dp[m][n][j-1], dp[m-nowm][n-nown][j-1] + 1]
+ 	化简(化简之后要从m->0, n->0循环！)
+ 	（错误想法：dp[m][n]要从dp[m-nowm][n-nown]求出，一定要先求dp[m-nowm][n-nown]啊，
+ 	实际上是本次j此循环的dp[m][n]要从上次j-1的dp[m-nowm][n-nown]求出，所以从m->0,n->0算是没问题的，
+ 	反而是0->m,0->n会导致上次j-1的dp[m-nowm][n-nown]被覆盖，理解了这层含义后，初始化为什么要全为0？因为第0此的dp[m][n]没元素，因此都为0（即dp[m][n]为0！
+   dp[m][n] = max{dp[m][n] , dp[m-nowm][n - nown] + 1}
+ */
+var findMaxForm = function(strs, m, n) {
+    var dp = [];
+    for(var i = 0; i < m+1; i++) {
+    	dp[i] = [];
+    	for(var j = 0; j < n+1; j++) {
+    		dp[i][j] = 0;
+    	}
+    }
+    var strslength = strs.length;
+    var nown = 0;
+    var nowm = 0;
+    for(var k = 0; k < strslength; k++) {
+    	for(r = 0; r < strs[k].length; r++) {
+    		if(strs[k][r] === '0')
+    			nowm++;
+    		else
+    			nown++;
+    	}
+    	for(var p = m; p >= nowm; p--)
+    		for(var q = n; q >= nown; q--)
+    			dp[p][q] = Math.max(dp[p][q], dp[p-nowm][q-nown] + 1);
+    	nowm = 0;
+    	nown = 0;
+    }
+    return dp[m][n];
+};
+</script>

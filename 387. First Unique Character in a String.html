@@ -1,0 +1,20 @@
+<script>
+function ListNode(val) {
+		if(val === "") return -1;
+		var vallength = val.length;
+		var ary = [];
+		for(var i = 0; i < vallength; i++) {
+				if(typeof ary[val.charCodeAt(i)-96] === 'undefined') {
+					ary[val.charCodeAt(i)-96] = 0;
+				} else{
+					ary[val.charCodeAt(i)-96]++;
+				}
+		}
+		for(var j = 0; j < vallength; j++) {
+			if(ary[val.charCodeAt(j)-96] === 0)
+				return j;
+		}
+		return -1;
+};
+console.log(ListNode("lleetddw"));
+</script>

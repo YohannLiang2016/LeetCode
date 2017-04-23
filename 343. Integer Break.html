@@ -1,0 +1,20 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number}
+ * 思路：
+ * 总之，就是尽量分成3
+ * https://discuss.leetcode.com/topic/43055/why-factor-2-or-3-the-math-behind-this-problem
+ */
+var integerBreak = function(n) {
+	if(n === 2) return 1;
+	if(n === 3) return 2;
+	var product = 1;
+	while(n > 4) {
+		product *= 3;
+		n -= 3;
+	}
+	product *= n;
+	return product;
+};
+</script>

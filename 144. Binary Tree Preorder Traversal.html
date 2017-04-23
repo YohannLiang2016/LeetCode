@@ -1,0 +1,28 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ * 没什么好说的记住栈
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var preorderTraversal = function(root) {
+    if(root === null) return [];
+    var stack = [];
+    stack.push(root);
+    var cur;
+    var result = [];
+    while(stack.length !== 0) {
+    		cur = stack.shift();
+    		result.push(cur.val);
+    		if(root.right !== null) stack.push(root.right);
+    		if(root.left !== null) stack.push(root.left);
+    }
+    return result;
+};	
+</script>

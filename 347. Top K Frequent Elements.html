@@ -1,0 +1,39 @@
+//备注：
+//c++版的o(nlogn)
+//因为map的find是logn
+//思路：
+//先用map统计，再用最大值堆插入得到，最大值堆插入也是logn
+//备注：
+//值得注意的是unorder_map的用法：
+//1、怎么判断key不再
+//2、怎么插入key和值:pair<int, int>(a, b)
+//priority_queue用法
+//定义的时候竟然可以pair<int, int>就按第一个来排序？！
+//插入更是要这样{a, b}
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+	vector<int> topK;
+	unordered_map<int, int> hmap;
+	int numslength = nums.size();
+	for (std::vector<int>::iterator it = nums.begin(); it != nums.end(); ++it) {
+		if (hmap.find(*it) == hmap.end()) {
+			hmap.insert(pair<int, int>(*it, 0));
+		}
+		else {
+			hmap[*it]++;
+		}
+	}
+	priority_queue<pair<int, int>> maxHeap; //可以这样写！
+	unordered_map<int, int>::iterator mapit = hmap.begin();
+	while (mapit != hmap.end()) {
+		maxHeap.push({ mapit->second, mapit->first });
+		mapit++;
+	}
+	for (int j = 0; j < k; j++) {
+		topK.push_back(maxHeap.top().second);
+		maxHeap.pop();
+	}
+	return topK;
+    }
+};

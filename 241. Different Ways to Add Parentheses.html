@@ -1,0 +1,42 @@
+<script type="text/javascript">
+/**
+ * @param {string} input
+ * @return {number[]}
+ * 思路：
+ * 很难，网上的思路就是没遇到一个符号就把字符串截成两段，然后递归
+ * 递归的函数：返回所有可能的结果
+ * 有没有重复还没有证明
+ */
+var diffWaysToCompute = function(input) {
+    var result = [];
+    var inputLength = input.length;
+    for(var i = 0; i < inputLength; i++) {
+        if(input[i] === '+' || 
+            input[i] === '-' ||
+             input[i] === '*') {
+            var string1 = input.substr(0, i);
+            var string2 = input.substr(i+1);
+            var part1 = arguments.callee(string1);
+            var part2 = arguments.callee(string2);
+            for(var j = 0; j < part1.length; j++) {
+                for(var k = 0; k < part2.length; k++) {
+                    switch(input[i]) {
+                        case '+':
+                        result.push(part1[j] + part2[k]);
+                        break;
+                        case '-':
+                        result.push(part1[j] - part2[k]);
+                        break;
+                        case '*':
+                        result.push(part1[j] * part2[k]);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if(result.length === 0)
+        result.push(eval(input));
+    return result;  
+};
+</script>

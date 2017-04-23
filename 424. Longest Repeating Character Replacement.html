@@ -1,0 +1,27 @@
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var characterReplacement = function(s, k) {
+    var start = 0;
+    var end = 0;
+    var slength = s.length;
+    var maxcount = 0; 
+    var charary = [];
+    var maxlength = 0;
+    for(var i = 0; i < 26; i++) {
+    	charary[i] = 0;
+    }
+    for(var end = 0; end < slength; end++) {
+    	maxcount = Math.max(maxcount, ++charary[s.charCodeAt(end) - 'A'.charCodeAt(0)]);
+    	while(end - start + 1 > maxcount + k) {
+    		--charary[s.charCodeAt(start) - 'A'.charCodeAt(0)];
+    		start++;
+    	}
+    	maxlength = Math.max(maxlength, end - start + 1);
+    }
+    return maxlength;
+};
+</script>

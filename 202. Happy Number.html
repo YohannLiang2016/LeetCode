@@ -1,0 +1,27 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {boolean}
+ *  Floyd Cycle detection algorithm可以检测有没有环...即两个point，一个一步一步走，一个跳着走
+ */
+var isHappy = function(n) {
+    function sumofsquredigits(num) {
+    	var sum = 0;
+    	do{
+    		sum +=  Math.pow((num % 10), 2);
+    		num = Math.floor(num / 10);
+    	}while(num !== 0);
+    	return sum;
+    }
+    var slow = n;
+    var fast = n;
+    do {
+    	slow = sumofsquredigits(slow);
+    	fast = sumofsquredigits(fast);
+    	fast = sumofsquredigits(fast);
+    }while(slow !== fast);
+    if(slow === 1)
+    	return true;
+    return false;
+};
+</script>

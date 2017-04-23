@@ -1,0 +1,29 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number[]}
+ * 只能背了...
+ * 一个数字的下一个点有三种情况
+ * 1、通常来说就是 自己*10
+ * 2、如果不是上面，则自己++，在自己结尾不等于9 和 自己还小于n情况下
+ * 3、如果结尾等于就...就一直去9，去到只生一个，然后自己在++
+ */
+var lexicalOrder = function(n) {
+	var list = [];
+	var cur = 1;
+    for(var i = 0; i < n; i++) {
+    	list.push(cur);
+    	if(cur * 10 < =n)
+    		cur *= 10;
+    	else if(cur % 10 !== 9 && cur + 1 <= n) {
+    		cur++;
+    	}else {
+    		while(Math.floor(cur / 10) % 10 === 9) {
+    			cur = Math.floor(cur / 10);
+    		}
+    		cur = Math.floor(cur / 10) + 1;
+    	}
+    }
+    return list;
+};
+</script>

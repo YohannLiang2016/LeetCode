@@ -1,0 +1,38 @@
+<script>
+/**
+ * @param {number[][]} people
+ * @return {number[][]}
+ * 思路：
+ * (h,k)，当给定一串(h, k),h最小的那一项的k值即它在本串的位置！
+ * 用递归可解决： 先排其他，再排最小...
+ * 写法上不是一般意义上的递归：
+ * 先排序，在for循环，从大到小，实际上运行顺序正好是递归所运行的顺序，所以本题写法很特别！
+ * 更清楚地说明：
+ * 次数   排的串   结果
+ * 1      (9, 0)   (9,0)
+ * 2      (7, 0)   (7,0) (9,0)
+ * 3      (5, 2)   (7,0) (9,0) (5,2)
+ * 4      (5, 3)   (7,0) (9,0) (5,2) (5,3)
+ * ...
+ * 其实还有一个小问题就是(5,2) (5,3)排序的时候怎样排：可以知道是先排(5,2)(5,3)即比较k值
+ * 备注
+ * 做不出
+ */
+var reconstructQueue = function(people) {
+    var peoplelength = people.length;
+    if(peoplelength === 0) return [];
+    var copyPeople = people.sort(function(a, b) {
+    	if(a[0] === b[0]) {
+    		return a[1] - b[1];
+    	}else {
+    		return b[0] - a[0];    		
+    	}
+    });
+    var queue = [];
+    for(var i = 0; i < peoplelength; i++) {
+    	queue.splice(copyPeople[i][1], 0, copyPeople[i]);
+    }
+    return queue;
+};
+console.log(reconstructQueue([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]]));
+</script>

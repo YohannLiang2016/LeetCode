@@ -1,0 +1,30 @@
+<script type="text/javascript">
+/**
+ * Definition for an interval.
+ * function Interval(start, end) {
+ *     this.start = start;
+ *     this.end = end;
+ * }
+ */
+/**
+ * 经典贪心法问题Interval scheduling问题，按结束时间排序
+ * @param {Interval[]} intervals
+ * @return {number}
+ */
+var eraseOverlapIntervals = function(intervals) {
+	if(intervals.length === 0) return 0;
+    intervals.sort(function(a, b) {
+    	return a.end - b.end;
+    });
+    var curend = intervals[0].end;
+    var count = 1;
+    var intervalslength = intervals.length;
+    for(var i = 1; i < intervalslength; i++) {
+    	if(curend <= intervals[i].start) {
+    		curend = intervals[i].end;
+    		count++;
+    	}
+    }
+    return intervalslength - count;
+};
+</script>

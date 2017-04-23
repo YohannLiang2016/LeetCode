@@ -1,0 +1,49 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 思路：
+ * 用栈来中序遍历树
+ * 另一种方法：(java)
+ *     List<Integer> list = new ArrayList<Integer>();
+
+    Stack<TreeNode> stack = new Stack<TreeNode>();
+    TreeNode cur = root;
+
+    while(cur!=null || !stack.empty()){
+        while(cur!=null){
+            stack.add(cur);
+            cur = cur.left;
+        }
+        cur = stack.pop();
+        list.add(cur.val);
+        cur = cur.right;
+    }
+
+    return list;
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+    if(root === null) return [];
+    var stack = [];
+    var result = [];
+    var temp;
+    stack.push(root);
+    while(stack.length !== 0) {
+    	if(temp.left !== null){ 
+    		stack.unshift(temp.left); 
+    		continue;
+    	}
+    	temp = stack.shift();
+    	result.push(temp.val);
+    	if(temp.right !== null) stack.unshift(temp.right);
+    }
+    return result;   
+};	
+</script>

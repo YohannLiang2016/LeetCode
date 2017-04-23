@@ -1,0 +1,41 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ * 别小看这一题，做了一个小时
+ * 学到的东西是，循环里面要保持一致，例如
+    var flag1 = 0;
+    var flag2 = flag1 + 1;
+    var temp;
+    for(; flag2 < nums.length; flag2++) {
+    	if(nums[flag2] === 0) {
+    		temp = nums[flag1];
+    		nums[flag1++] = nums[flag2];
+    		nums[flag2] = temp;
+    	}
+    }
+    肯定不对，在循环里面，在进入循环前flag1意义是指向不是0的位置，而初始化是有可能指向0的！
+ */
+var sortColors = function(nums) {
+    var flag1 = 0;
+    while(nums[flag1] === 0) flag1++;
+    var flag2 = flag1 + 1;
+    var temp;
+    for(; flag2 < nums.length; flag2++) {
+    	if(nums[flag2] === 0) {
+    		temp = nums[flag1];
+    		nums[flag1++] = nums[flag2];
+    		nums[flag2] = temp;
+    	}
+    }
+    while(nums[flag1] === 1) flag1++;
+    flag2 = flag1 + 1;
+    for(;flag2 < nums.length; flag2++) {
+    	if(nums[flag2] === 1) {
+    		temp = nums[flag1];
+    		nums[flag1++] = nums[flag2];
+    		nums[flag2] = temp;
+    	}
+    }   
+};	
+</script>

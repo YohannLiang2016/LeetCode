@@ -1,0 +1,29 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ * 思路：
+ * https://discuss.leetcode.com/topic/77923/java-10-lines-and-c-12-lines-linear-time-complexity-o-n-with-explanation
+ * 备注：
+ * 注意if(i < numslength)就好了>。。
+ * 值得注意的是第一题为什么用map呢是因为第一个数组是子集...
+ */
+var nextGreaterElements = function(nums) {
+    var decreasingsubsequence = [];
+    var result = [];
+    var numslength = nums.length;
+    var j = 0;
+    for(var i = 0; i < 2 * numslength; i++) {
+    	j = i % numslength; 
+    	while(decreasingsubsequence.length !== 0 && nums[j] > nums[decreasingsubsequence[0]]) {
+    		result[decreasingsubsequence.shift()] = nums[j];
+    	}
+    	if(i < numslength) decreasingsubsequence.unshift(j);
+    }
+    while(decreasingsubsequence.length !== 0) {
+    	result[decreasingsubsequence.shift()] = -1;
+    }
+    return result;
+};
+console.log(nextGreaterElements([1,2,1]));
+</script>

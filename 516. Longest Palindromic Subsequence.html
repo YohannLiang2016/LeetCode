@@ -1,0 +1,37 @@
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @return {number}
+ * 运用动态规划
+ * dp[i][j]意义是第i到第j个字符串中回文长度
+ * dp递推式
+ * 如果a[j] = a[k], dp[j][k] = dp[j+1][k-1] + 2;
+ * 否则dp[j][k] = Math.max(dp[j+1][k], dp[j][k-1]);
+ * 递推顺序是j从length-1开始，k从i+1开始（怎么想到？，由a[j][k]要从j+1，k-1得到且j>=k已知可知）
+ * 初始化时dp[i][i]=1 其他为0
+ * 小插曲
+ * 题目要求字串是回文，因此不是挑几个字母组成回文
+ */
+var longestPalindromeSubseq = function(s) {
+  var dp = [];
+  var slength = s.length;
+  for(var i = 0; i < slength; i++) {
+  	dp[i] = [];
+  	dp[i][i] = 1;
+  }  
+  for(var j = slength - 1; j >= 0; j--) {
+  	for(var k = j + 1; k < slength; k++) {
+  		if(s[j] === s[k]){
+  			if(typeof dp[j+1][k-1] === 'undefined'){
+  				dp[j][k] = 2;
+  			}else
+  			dp[j][k] = dp[j+1][k-1] + 2;
+  		}
+  		else {
+  			dp[j][k] = Math.max(dp[j+1][k], dp[j][k-1]);
+  		}
+  	}
+  }
+  return dp[0][slength-1];
+};
+</script>

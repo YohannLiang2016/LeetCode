@@ -1,0 +1,18 @@
+<script>
+/**
+ * @param {number} area
+ * @return {number[]}
+ * 思路：
+ * 开根号，然后从根号--
+ */
+var constructRectangle = function(area) {
+    var areasqrt = Math.floor(Math.sqrt(area));
+    while(1) {
+    	if(area % areasqrt == 0) {
+    		break;
+    	}
+    	areasqrt--;
+    }
+    return [area / areasqrt, areasqrt];
+};
+</script>

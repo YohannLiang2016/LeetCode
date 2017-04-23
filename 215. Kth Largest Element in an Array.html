@@ -1,0 +1,12 @@
+<script type="text/javascript">
+/**
+ * 那个快排慢慢研究了
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var findKthLargest = function(nums, k) {
+  nums = nums.sort((a, b)=>a-b); //有坑，单纯的sort()是按字符串顺序的
+  return nums[nums.length - k];  
+};
+</script>

@@ -1,0 +1,50 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 虽然网上说是有O(高度)但是这是建立在了每个节点都表明了自己的标号情况下（建树也要时间啊），因此，最好的还是中序遍历
+ * 中序遍历就是按照由大到小的顺序来找！
+ * 中序遍历的迭代版
+ * while(temp !== null) {
+	stack.push(temp);
+	temp = temp.left;
+ }
+ * while(stack.length !== 0) {
+	temp = stack.pop();
+	k--;
+	if(k === 0) return temp.val;
+	temp = temp.right;
+	while(temp !== null) {
+		stack.push(temp.left);
+		temp = temp.left;
+	}
+ }
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {number}
+ */
+var kthSmallest = function(root, k) {
+	var cur = k;
+	var result = 0;
+    function inorder(root) {
+    	if(root.left !== null) arguments.callee(root.left);
+    	cur--;
+    	if(cur === 0) {
+    		result = root.val;
+    		return;
+    	}else {
+    		if(cur < 0) {
+    		return;
+    	}
+    	}
+    	if(root.right !== null) arguments.callee(root.right);
+    }
+    inorder(root);
+    return result;
+};
+</script>

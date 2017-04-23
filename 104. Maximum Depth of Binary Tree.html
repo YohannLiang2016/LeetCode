@@ -1,0 +1,21 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ * 思路：
+ * 普通的递归遍历
+ * 树的高度=左树/右树高度+1
+ */
+var maxDepth = function(root) {
+	var left = arguments.callee(root.left);
+	var right = arguments.callee(root.right);
+    return left>right?(left+1):(right+1);
+};
+</script>

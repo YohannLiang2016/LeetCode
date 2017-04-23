@@ -1,0 +1,34 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ * 具体哪些数字我可以不记录，没必要，这个代码就像拍升级当one two有值时候就说明之前肯定存在，已经升了这一级
+ * 当 目前数字比这一级别大时候，就可以发现是有升序的了。
+ * 如 4 5（到这里two是5，升级到了5） 1 （这里one变成1，没关系，） 2 （你看，过不了第二关，第二关被拉低变成了2，这时候只要过了2就通过了）
+ * 如 4 5 1 6
+ before coding I also thought about this solution and I did’t think that will work, as it appears to be very naïve and greedy: find first smallest, then find second smallest, then find the third and bingo. I argued myself it cannot pass the case like [1,2,0,3] since c1 is changed.
+
+But when I take a closer look, it does [1,2,0,3] very well. And I realize that c1 and c2 are indeed having the meaning of:
+
+C1 = so far best candidate of end element of a one-cell subsequence to form a triplet subsequence
+
+C2 = so far best candidate of end element of a two-cell subsequence to form a triplet subsequence
+
+So c1 and c2 are the perfect summary of history.
+ */
+var increasingTriplet = function(nums) {
+    var one = Number.MAX_SAFE_INTEGER;
+    var two = Number.MAX_SAFE_INTEGER;
+    for(var i = 0; i < nums.length; i++) {
+    	if(nums[i] <= one) {
+    		one = nums[i];
+    	}else {
+    		if(nums[i] <= two) {
+    			two = nums[i];
+    		}else {
+    			return true;
+    		}
+    	}
+    }
+};
+</script>

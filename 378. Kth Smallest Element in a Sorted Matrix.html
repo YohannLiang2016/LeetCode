@@ -1,0 +1,24 @@
+<script type="text/javascript">
+/**
+ * @param {number[][]} matrix
+ * @param {number} k
+ * @return {number}
+ * 有空多看看，就是从右上角数，有多少个小于的 mid是猜测数，神奇的是mid最终必然等于我们要的数（必然！）
+ */
+var kthSmallest = function(matrix, k) {
+    var lo = matrix[0][0];
+    var hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;
+    while(lo < hi) {
+        var mid = lo + Math.floor((hi - lo) / 2); //记得math
+        var howmanynumsmallerorequelthank = 0;
+        var j = matrix[0].length - 1;
+    	for(var i = 0; i < matrix.length; i++) {
+    		while(j >= 0 & matrix[i][j] > mid) j--;
+    		howmanynumsmallerorequelthank += (j + 1);
+    	}
+    	if(howmanynumsmallerorequelthank < k) lo = mid + 1; //重要
+    	else hi = mid;
+    }
+    return lo;  
+};
+</script>

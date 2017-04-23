@@ -1,0 +1,31 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {string[]}
+ * 就是递归...
+ */
+var binaryTreePaths = function(root) {
+    var result = [];
+    if(root === null) return [];
+    function helper(root, tempresult) {
+    	if(root.left === null && root.right === null) {
+    		result.push(tempresult.join('->');
+    		return;
+    	}
+    	tempresult.push(root.val);
+    	if(root.left !== null) arguments.callee(root.left, tempresult);
+    	if(root.right !== null) arguments.callee(root.right, tempresult);
+    	tempresult.pop();
+    	return;
+    }
+    helper(root, [])
+    return result;
+};
+</script>

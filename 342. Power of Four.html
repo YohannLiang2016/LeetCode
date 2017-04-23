@@ -1,0 +1,20 @@
+<script type="text/javascript">
+/**
+ * 在题目powerof2基础上做得
+ * @param {number} num
+ * @return {boolean}
+ */
+var isPowerOfFour = function(num) {
+	if(num === 0) return false;
+	var n = Math.sqrt(num);
+	if(!Number.isInteger(n)) {
+		return false;
+	}
+	for(var i = 0; i < 32; i++) {
+		if(n === (1 << i)) {
+			return true;
+		}
+	}
+	return false;
+};
+</script>

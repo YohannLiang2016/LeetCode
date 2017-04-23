@@ -1,0 +1,17 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 有334题做铺垫就很简单了
+ */
+var lengthOfLIS = function(nums) {
+  if(nums.length === 0) return 0;
+  var aryStoreCurLevel = [];
+  for(var i = 0; i < nums.length; i++) {
+  	var j = 0;
+  	while(j < aryStoreCurLevel.length && nums[i] > aryStoreCurLevel[j]) j++;
+  	aryStoreCurLevel[j] = num[i];
+  }
+  return aryStoreCurLevel.length;  
+};
+</script>

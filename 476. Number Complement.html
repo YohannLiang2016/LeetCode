@@ -1,0 +1,23 @@
+<script>
+/**
+ * @param {number} num
+ * @return {number}
+ * 思路：
+ * 模2得最后一bit，然后结果累加，最后除以2。
+ * 备注：
+ * 除以2时候记得Math.floor
+ */
+var findComplement = function(num) {
+    var numnow = num;
+    var complementOfRemainder = 0;
+    var pow = 0;
+    var Complement = 0;
+    while(numnow >= 1) {
+    	complementOfRemainder = 1 - (numnow % 2);
+    	Complement = Complement + (complementOfRemainder * Math.pow(2, pow++));
+    	numnow = Math.floor(numnow / 2);
+    }
+    return Complement;
+};
+console.log(findComplement(2));
+</script>

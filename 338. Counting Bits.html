@@ -1,0 +1,33 @@
+<script>
+/**
+ * @param {number} num
+ * @return {number[]}
+ * 思路：
+ *                0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+ * 怎么得到进位x  0 1   2       3                    4
+ *                    x0  x0x1x2  x0x1x2 x3 x4 x5 x6  
+                      0   0 1 0   0 1 0  2  0  1  0
+ * 几次进位       0 1 0 2 0 1 0 3 0 1 0  2  0  1  0  4  0  1
+ * 结果与进位关系：结果=上一个记过-上一个进位+1
+ */
+var countBits = function(num) {
+    var carrybit = [0]; //初始化第一个进位,0代表不会发生进位（1的数量直接加1），1代表发生一个进位（先减1，再加1）
+    var pow = 0;
+    var nowpow = 1;
+    var nextpow = 2;
+    var numberOfBits = [0];
+    for(var i = 1; i <= num; i++) {
+        if(i == nextpow - 1) {
+            carrybit.push(pow + 1);
+            pow++;
+            nowpow = Math.pow(2, pow);
+            nextpow = Math.pow(2, pow+1);
+        } else{
+            carrybit.push(carrybit[i - nowpow]);
+        }
+        numberOfBits.push(numberOfBits[i-1] - carrybit[i-1] + 1);
+    }
+    return numberOfBits;
+};
+console.log(countBits(16));
+</script>

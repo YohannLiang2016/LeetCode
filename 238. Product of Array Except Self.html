@@ -1,0 +1,41 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ * 思路：
+ * 注意三个情况：
+ * 1、没有0
+ * 2、一个0
+ * 3、两个以上0
+ */
+var productExceptSelf = function(nums) {
+	var productOfAll = 1;
+	var productArray = [];
+	var numslength = nums.length;
+	var moreThanTwoZero = 0;
+	for(var i = 0; i < numslength; i++) {
+	    if(nums[i] !== 0){
+		    productOfAll *= nums[i];
+		    moreThanTwoZero++;
+        }
+	}
+	if(moreThanTwoZero === 1) {
+		for(var j = 0; j < numslength; j++) {
+			if(nums[j] !== 0)
+				productArray.push(0);
+			else
+				productArray.push(productOfAll);
+		}    
+	}else {
+		if(moreThanTwoZero === 0) {
+			for(var k = 0; k < numslength; k++) {
+				productArray.push(productOfAll / nums[k]);
+			} 			
+		}else {
+			for(var l = 0; l < numslength; l++) {
+				productArray.push(0);
+			} 			
+		}
+	}
+};
+</script>

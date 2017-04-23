@@ -1,0 +1,26 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 思路：
+ * 中位数
+ * 直觉...
+ * 中位数把整个数字分成两串
+ * 如果选>中位数，则使另一半每次都增加1 看例子
+ * 1 5 5 8 11
+ * 如果选平均数6，则 5 1 1 2 5      
+ * 中位数5，则4 0 0 3 6
+ * 可以看出，选6另一半的开销多了1， 5->6： 0 0 =>1 1与3 6 => 2 5抵消，但是4 => 5增加了1（这里多开销了） 
+ */
+var minMoves2 = function(nums) {
+	var numsSorted = nums.sort((a, b)=>a-b);
+	var numslength = nums.length;
+	var middle = nums[Math.floor(numslength/2)];
+	var moves = 0;
+	for(var i = 0; i < numslength; i++) {
+		moves += Math.abs(nums[i] - middle);
+	}
+	return moves;
+};
+console.log(minMoves2([1,0,0,8,6]));
+</script>

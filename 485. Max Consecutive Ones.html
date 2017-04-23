@@ -1,0 +1,31 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 思路：
+ * 用flag记录上一个是否为1，若是一，则当前连续个数加一，若当前连续个数大于历史最大，更新历史最大
+ * 备注：
+ */
+var findMaxConsecutiveOnes = function(nums) {
+    var numslength = nums.length;
+    var maxnum = 0;
+    var tempnum = 0;
+    var flag = false; //上一个是否为1
+    for(var i = 0; i < numslength; i++) {
+        if(nums[i] === 1) {
+            if(flag === true) {
+                tempnum++;
+            } else{
+                tempnum = 1;
+            }
+            if(tempnum > maxnum)
+                maxnum = tempnum;
+            flag = true;
+        }else {
+            flag = false;
+        }
+    }
+    return maxnum;
+};
+console.log(findMaxConsecutiveOnes([1,1,0,1,1,1]))
+</script>

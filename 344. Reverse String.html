@@ -1,0 +1,22 @@
+<script>
+/**
+ * @param {string} s
+ * @return {string}
+ * 思路：
+ * 只比一半
+ * 用它提供的函数还慢一点
+ */
+var reverseString = function(s) {
+    var ary = s.split('');
+    var arylength = s.length;
+    var max = (arylength - 1 ) / 2;
+    var temp;
+    for(var i = 0; i < max; i++) {
+    	temp = ary[i];
+    	ary[i] = ary[arylength - i - 1];
+    	ary[arylength - i - 1] = temp;
+    }
+    return ary.join('');
+};
+console.log(reverseString("hello"));
+</script>

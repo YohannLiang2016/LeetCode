@@ -1,0 +1,24 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canPartition = function(nums) {
+    if(nums.length === 0 || nums.length === 1) return false;
+var sumofrightsubset =  function(aryofnum, targetsum) {
+	var dp = Array(targetsum + 1).fill(0);
+	dp[0] = 1;
+	for(var j = 0; j < aryofnum.length; j++) {
+		for(var k = targetsum; k >= aryofnum[j]; k--) {
+			dp[k] += dp[k-aryofnum[j]];
+		}
+	}
+	return dp[targetsum];
+}
+var sum = 0;
+for(var i = 0; i < nums.length; i++)
+    sum+= nums[i];
+if(sum % 2 === 1) return false;
+return sumofrightsubset(nums, Math.round(sum / 2))>0?true:false; 
+};
+</script>

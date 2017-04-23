@@ -1,0 +1,75 @@
+<script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+ /*
+  * 思路：
+  * 用栈来颠倒就好
+  * 好像不符合题目说不准倒过来的要求，我去
+  * 但是discuss又都是这个
+  *
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+ function ListNode(val) {
+     this.val = val;
+     this.next = null;
+ }
+var addTwoNumbers = function(l1, l2) {
+    var first = [];
+    var second = [];
+    var temp1 = l1;
+    var temp2 = l2;
+    while(temp1 != null) {
+    	first.unshift(temp1.val);
+    	temp1 = temp1.next;
+    }
+    while(temp2 != null) {
+    	second.unshift(temp2.val);
+    	temp2 = temp2.next;
+    }
+    var sum = 0;
+    var carry = 0;
+    var newNode;
+    var lastNode = null;
+    while(first.length != 0 || second.length != 0) {
+    	sum = 0;
+    	if(first.length != 0) sum = sum + first.shift();
+    	if(second.length != 0) sum = sum + second.shift();
+    	sum = sum + carry;
+    	if(sum >= 10) {
+    		sum -= 10;
+    		carry = 1;
+    	}else {
+    		carry = 0;
+    	}
+    	newNode = new ListNode(sum);
+    	newNode.next = lastNode;
+    	lastNode = newNode;
+    }
+    if(carry === 1) {
+    	newNode = new ListNode(1);
+    	newNode.next = lastNode;
+    }
+    return newNode;
+};
+var l1 = new ListNode(5);
+// var l12 = new ListNode(2);
+// l1.next = l12;
+// var l13 = new ListNode(4);
+// l12.next = l13;
+// var l14 = new ListNode(3);
+// l13.next = l14;
+var l2 = new ListNode(5);
+// var l21 = new ListNode(6);
+// l2.next = l21;
+// var l22 = new ListNode(4);
+// l21.next = l22;
+console.log(addTwoNumbers(l1, l2));
+</script>

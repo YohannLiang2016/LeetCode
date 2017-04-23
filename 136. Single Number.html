@@ -1,0 +1,19 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ * 思路： 
+ * xor可以使第二次遇到抵消
+ * 备注：
+ * 想不到就真的想不到了...
+ */
+var findsingleNumber = function(nums) {
+	var numslength = nums.length;
+	var singleNumber = 0;
+	for(var i = 0; i < numslength; i++) {
+		singleNumber ^= nums[i];
+	}
+	return singleNumber;
+};
+console.log(findsingleNumber([3,3,7,7,8,8,2,2,1]))
+</script>

@@ -1,0 +1,22 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 这个递归，感觉跟以前有点不同，这里并不是传入一棵树。嗯...而是传入两个对称的子树然后比较
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+  function helper(one, two) {
+  	if(one === null || two === null) return one === two;
+  	if(one.val !== two.val) return false;
+  	return arguments.callee(one.left, two.right) && arguments.callee(one.right, two.left);
+  }
+  return root === null || helper(root.left, root.right);  
+};
+</script>

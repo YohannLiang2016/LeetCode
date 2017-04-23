@@ -1,0 +1,19 @@
+<script>
+/**
+ * @param {number} n
+ * @return {number}
+ * 思路，竟然做不出？？？就是排列组合
+ */
+var countNumbersWithUniqueDigits = function(n) {
+	if(n === 0) return 1;
+    if(n === 1) return 10;
+    var temp = 9;
+    var result = 10;
+	var lowest = (10-n)?(10-n):0;
+	for(var i = 9; i > lowest; i--) {
+		temp = temp * i;
+		result += temp; 
+	}
+	return result;
+};
+<script>

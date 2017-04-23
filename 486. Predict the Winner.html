@@ -1,0 +1,28 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ * 典型的博弈问题，但是要做适当转换
+ * 题目转换为：
+ * 建立一个score函数代表着，本玩家从s到e中，得分的最大值，如果得分小于0，即输了，得分大于0就赢了
+ * 上面的程序引入了一个n2的空间来存s到e的得分，可以减少时间，上面通过了，下面没通过
+ */
+var PredictTheWinner = function(nums) {
+    function score(ary, s, e, scoreary) {
+    	if(typeof scoreary[s][e] === 'undefined') {
+    		scoreary[s][e] = (s===e)?ary[s]:Math.max(nums[s] - arguments.callee(ary, s+1, e, scoreary), nums[e] - arguments.callee(ary, s, e-1, scoreary));
+    	}
+    	return scoreary[s][e];
+    }
+    var sary = [];
+    for(var i = 0; i < nums.length; i++){
+        sary[i]=[];
+    }
+    return score(nums, 0, nums.length-1, sary) >= 0;
+    // function score(ary, s, e) {
+    // 	return (s===e)?ary[s]:Math.max(nums[s] - arguments.callee(ary, s+1, e), nums[e] - arguments.callee(ary, s, e-1));
+    // }
+    // return score(nums, 0, nums.length-1) >= 0;
+};
+</script>
+

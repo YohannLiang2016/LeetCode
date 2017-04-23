@@ -1,0 +1,21 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 一次过了
+ * maxmoney[i]表示前i间的最大值
+ * 递推公式 maxmoney[i] = Math.max(nums[i] + maxmoney[i - 2], maxmoney[i-1])
+ * 不能抢相邻就隐藏在maxmoney[i-2]
+ */
+var rob = function(nums) {
+    if(nums.length === 0) return 0;
+    if(nums.length === 1) return nums[0];
+	var maxmoney = [];
+	maxmoney[0] = nums[0];
+	maxmoney[1] = nums[0] > nums[1]?nums[0]:nums[1];
+	for(var i = 2; i < nums.length; i++) {
+		maxmoney[i] = Math.max(nums[i] + maxmoney[i - 2], maxmoney[i-1]);
+	}
+	return maxmoney[nums.length - 1];
+};
+</script>

@@ -1,0 +1,38 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} A
+ * @param {number[]} B
+ * @param {number[]} C
+ * @param {number[]} D
+ * @return {number}
+ * 思路：
+ * https://discuss.leetcode.com/topic/67593/clean-java-solution-o-n-2
+ */
+var fourSumCount = function(A, B, C, D) {
+    var myMap = new Map();
+    var sum = 0;
+    for(var i = 0; i < A.length; i++) {
+    	for(var j = 0; j < B.length; j++) {
+    		sum = A[i] + B[j];
+    		if(myMap.has(sum)) {
+    			myMap.set(sum, myMap.get(sum) + 1);
+    		}else {
+    			myMap.set(sum, 1);
+    		}
+    	}
+    }
+    var result = 0;
+    for(var m = 0; m < A.length; m++){
+    	for(var n = 0; n < B.length; n++) {
+    		sum = C[m] + D[n];
+    		if(myMap.has(-sum)) {
+    			if(myMap.get(sum) > 0){
+    				myMap.set(sum, myMap.get(sum) - 1);
+    				result += 1;
+    			}
+    		}
+    	}
+    }
+    return result;
+};	
+</script>

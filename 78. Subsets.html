@@ -1,0 +1,23 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ * 回溯法，套模板类似77combination
+ */
+var subsets = function(nums) {
+    function helper(result, temp, i, nums) {
+	  	for(var j = i; j < nums.length; j++) {
+	  		temp.push(nums[j]); //前进
+	  		result.push(temp.slice());
+	  		helper(result, temp, j + 1, nums); //前进
+	  		temp.pop(); //回退
+	  	}
+	  }
+	  var result = [];
+	  result.push([]);
+	  if(nums.length === 0) return result;
+	  var temp = [];
+	  helper(result, temp, 0, nums);
+	  return result;  
+}
+</script>

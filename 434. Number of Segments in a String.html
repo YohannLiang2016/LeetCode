@@ -1,0 +1,20 @@
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var countSegments = function(s) {
+	var slength = s.length;
+	var flag = 0;
+	var result = 0;
+	for(var i = 0; i < slength; i++) {
+		if(s[i] === ' ') 
+			flag = 0;
+		else if(flag === 0){
+			flag = 1;
+			result++;
+		}
+	}
+	return result;      
+};
+</script>

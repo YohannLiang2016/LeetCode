@@ -1,0 +1,26 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {string[]}
+ * 思路：
+ * 还能这样子写：
+ * 括号匹配！！
+ */
+var generateParenthesis = function(n) {
+	var result = [];
+	function callback(l, nowstr, open, close, max) {
+		if(nowstr.length === 2 * max) {
+			l.push(nowstr);
+			return;
+		}
+		if(open < max) {
+			arguments.callee(l, nowstr + '(', open + 1, close, max);
+		}	 
+		if(close < open) {
+			arguments.callee(l, nowstr + ')', open, close + 1, max);
+		}
+	}
+	callback(result ,'', 0, 0, n);
+	return result;
+};
+</script>

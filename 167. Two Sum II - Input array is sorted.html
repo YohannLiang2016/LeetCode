@@ -1,0 +1,30 @@
+<script>
+/**
+ * @param {number[]} numbers
+ * @param {number} target
+ * @return {number[]}
+ * 思路：
+ * 1 2 3 5 5 6 88 99 109 target: 9
+ * 先考查 1 + 109 > 9则
+ * 考查 1 + 99 < 9则
+ * ...
+ * 考查1 + 6 < 9则
+ * 考查2 + 6 < 9则
+ * 3 + 6 = 9找到了
+ * 为什么呢？
+ * 因为当a + b > target则b已经不可能是答案了，因为它加上最小的a都大于结果
+ * 同样的a + b < target则a已经不可能是答案了，因为它加上最大的b都小于结果  
+ */
+var twoSum = function(numbers, target) {
+   var s = 0;
+   var l = numbers.length - 1;
+   while(numbers[s] + numbers[l] != target) {
+   	if(numbers[s] + numbers[l] > target) {
+   		l--;
+   	}else {
+   		s++;
+   	}
+   }
+   return [s++, l++];
+};
+</script>

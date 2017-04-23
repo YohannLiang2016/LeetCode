@@ -1,0 +1,18 @@
+<script>
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {character}
+ * 思路：
+ * 之前一题，xor可以抵消重复的数字，那么只要把字符转换为数字就可以了
+ */
+var findTheDifference = function(s, t) {
+    var slength = s.length;
+    var code;
+    for(var i = 0; i < slength; i++) {
+    	code ^= (s[i].charCodeAt(0) ^ t[i].charCodeAt(0)); 
+    }
+    code ^= t[slength].charCodeAt(0);
+    return String.fromCharCode(code);
+};
+</script>

@@ -1,0 +1,30 @@
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseVowels = function(s) {
+  if(s.length === 0) return '';
+  var l = 0;
+  var h = s.length - 1;
+  var fakearys = s.split('');
+  var arys = s.toLowerCase().split('');
+  var temp;
+  while(l < h) {
+  	while(l < h && arys[l] != 'a' && arys[l] != 'e' && arys[l] != 'i' && arys[l] != 'o' && arys[l] != 'u') {
+  		l++;
+  	}
+  	while(l < h && arys[h] != 'a' && arys[h] != 'e' && arys[h] != 'i' && arys[h] != 'o' && arys[h] != 'u') {
+  		h--;
+  	}
+  	if(l < h) {
+  		temp = fakearys[l];
+  		fakearys[l] = fakearys[h];
+  		fakearys[h] = temp;
+  	}
+  	l++;
+  	h--;
+  }
+  return fakearys.join('');  
+};
+</script>

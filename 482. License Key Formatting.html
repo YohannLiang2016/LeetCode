@@ -1,0 +1,20 @@
+<script>
+/**
+ * @param {string} S
+ * @param {number} K
+ * @return {string}
+ */
+var licenseKeyFormatting = function(S, K) {
+    S = S.toUpperCase();
+    var noDashS = S.split('-').join('');
+    var result = '';
+    result = noDashS.substr(noDashS.length - K, K);
+    for(var i = noDashS.length - 2*K; i >= 0;) {
+    	result = noDashS.substr(i, K) + '-' + result;
+    	i = i - K;
+    }
+    result = noDashS.slice(0, i+K) + '-' + result;
+    if(result[0] === '-') result = result.substr(1, result.length - 1);
+    return result;
+};
+</script>

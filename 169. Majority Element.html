@@ -1,0 +1,35 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number}
+     public int majorityElement(int[] num) {
+
+        int major=num[0], count = 1;
+        for(int i=1; i<num.length;i++){
+            if(count==0){
+                count++;
+                major=num[i];
+            }else if(major==num[i]){
+                count++;
+            }else count--;
+            
+        }
+        return major;
+    }
+ */
+var majorityElement = function(nums) {
+    var map = [];
+    var numslength = nums.length;
+    for(var i = 0; i < numslength; i++) {
+    	if(typeof map[nums[i]] === 'undefined') {
+    		map[nums[i]] = 1;
+    	} else{
+    		map[nums[i]]++;
+    	}
+    }
+    for(var j = 0; j < numslength; j++) {
+    	if(map[nums[j]] > Math.floor(numslength/2))
+    		return nums[j];
+    }
+};
+</script>

@@ -1,0 +1,19 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 思路：
+ * n-1个加一等于 一个数字减1
+ * 则每个数字减到最小值之和是最小的moves
+ */
+var minMoves = function(nums) {
+	nums.sort((a, b) => a - b);
+	var numslength = nums.length;
+	var summoves = 0;
+	var num0 = nums[0];
+	for(var i = 1; i < numslength; i++) {
+			summoves += nums[i] - num0;
+	}    
+	return summoves;
+};
+</script>

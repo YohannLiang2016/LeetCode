@@ -1,0 +1,42 @@
+<script>
+/**
+ * @param {string[]} words
+ * @return {string[]}
+ */
+var findWords = function(words) {
+	var firstrow = ['`',,'1','2','3','4','5','6','7','8','9','10','-','=']
+	var secondrow = ['q','w','e','r','t','y','u','i','o','p','[',']','\\'];
+	var thirdrow = ['a','s','d','f','g','h','j','k','l',';','\'','A','S','D','F','G','H','J','K','L'];
+	var fourthrow = ['z','x','c','v','b','n','m',',','.','/','Z','X','C','V','B','N','M','<','>','?'];
+	var wordslength = words.length;
+	var firstLetter;
+	var witchrow;
+	var failflag = 0;
+	var result = [];
+	var newwords;
+	for(var i = 0; i < wordslength; i++) {
+		newwords = words[i].toLowerCase();
+		firstLetter = newwords[0];
+		if(firstrow.indexOf(firstLetter) != -1) {
+			witchrow = firstrow;
+		}else if(secondrow.indexOf(firstLetter) != -1) {
+			witchrow = secondrow;
+		}else if(thirdrow.indexOf(firstLetter) != -1) {
+			witchrow = thirdrow;
+		}else if(fourthrow.indexOf(firstLetter) != -1) {
+			witchrow = fourthrow;
+		}else continue;	
+		failflag = 0;
+		for(var j = 1; j < words[i].length; j++) {
+			if(witchrow.indexOf(newwords[j]) === -1){
+				failflag = 1;
+				break;
+			}
+		}
+		if(failflag === 0)
+			result.push(words[i]);
+	}
+	return result;
+};
+console.log(findWords(["Aasdfghjkl","Qwertyuiop","zZxcvbnm"]));
+</script>

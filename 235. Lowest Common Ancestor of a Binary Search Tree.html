@@ -1,0 +1,34 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ * leetcode二叉树定义，所以...不用考虑 根+右树有重复
+ */
+var lowestCommonAncestor = function(root, p, q) {
+	if(p.val === root.val || q.val === root.val) return root;
+    if(p.val < root.val) {
+    	if(q.val > root.val) {
+    		return root;
+    	}else {
+    		return arguments.callee(root.left, p, q);
+    	}
+    } else{
+    	if(q.val < root.val) {
+    		return root;
+    	}else {
+    		return arguments.callee(root.right, p, q);
+    	}
+    }
+    // 简写  return (root.val - p.val) * (root.val - q.val) < 1 ? root :
+    //        lowestCommonAncestor(p.val < root.val ? root.left : root.right, p, q);
+};
+</script>

@@ -1,0 +1,25 @@
+<script type="text/javascript">
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ * dp问题，肯定是只有在向左，向右走才能有最小值
+ */
+var minPathSum = function(grid) {
+	var width = grid[0].length;
+	var height = grid.length;
+	var result = [[grid[0][0]]];
+	for(var k = 1; k < width; k++){
+		result[0][k] = grid[0][k] + result[0][k-1];
+	}
+	for(var l = 1; l < height; l++){
+		result[l] = [];
+		result[l][0] = grid[l][0] + result[l-1][0];  
+	}
+    for(var i = 1; i < height; i++) {
+    	for(var j = 1; j < width; j++) {
+    		result[i][j] = grid[i][j] + Math.min(result[i-1][j], result[i][j-1]);
+    	}
+    }
+    return result[height-1][width-1];
+};
+</script>

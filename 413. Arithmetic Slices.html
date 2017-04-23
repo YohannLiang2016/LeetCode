@@ -1,0 +1,25 @@
+<script>
+/**
+ * @param {number[]} A
+ * @return {number}
+ * 思路：
+ * n个数字组成的等差数列包含(n-2 + 1)*(n-2)/2个slice
+ * 顺序执行过去，看一下有多少个等差数列即可
+ */
+var numberOfArithmeticSlices = function(A) {
+    var arraylength = A.length;
+    var temparithmetic = 0;
+    var numOfArithmeticSlices = 0;
+    for(var i = 1; i < arraylength - 1; i++) {
+        if(A[i-1] - A[i] === A[i] - A[i+1]) {
+            temparithmetic++;
+            numOfArithmeticSlices += temparithmetic;
+            console.log(temparithmetic);
+        }else {
+            temparithmetic = 0;
+        }
+    }
+    return numOfArithmeticSlices;
+};
+console.log(numberOfArithmeticSlices([1, 2, 3, 4]))
+</script>

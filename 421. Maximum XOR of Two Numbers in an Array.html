@@ -1,0 +1,41 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 思路：
+ * 1、注释和2、我自己写的：
+ * What we know now is there must be a result.Suppose 11011 is the result,and A,B is in the nums, A(00001) ^ B(11010) = 11011. there is only two way that the alogorithm can't get the best result.
+
+1->0 for example, when i = 3, we miss the best result. That means we got max = 10***. That means tmp ^ prefix(11*** ^ A)'s result don't exist in the set. That can't be possible because when i = 3 A's first 2 bit and B's first 2 bit must be in the set(that is 00000 ^ 11000).
+0->1 for example, when i = 2, we miss the best result. That means we got max = 111**. That means tmp ^ prefix(111** ^ ?) 's result exists in the set. That means there are C and D in the nums. C's first 3 bit XOR D's first 3 bits = 111** ! and C ^ D > C' first 3 bit ^ D' first 3 bit = 111** > 11011. That conflicts with what we suppose.
+so the alogorithm is right.Correct me if I'm wrong:) .
+ */
+var findMaximumXOR = function(nums) {
+	var max = 0;
+	var mask = 0;
+	for(var i = 31; i >= 0; i--) {
+		mask |= (1<<i);
+		var prefixset = new Set();
+		for(var j = 0; j < nums.length; j++) {
+			prefixset.add(nums[j] & mask);
+		}
+		var candidate = max | (1 << i);
+		for(let item of prefixset) {
+			// I saw deeply and found out a very important xor feature I missed, that is: if a^b=c, then a^c=b, b^c=a. That's why the answer using this code:
+
+   //          for(int prefix : set){
+   //              if(set.contains(tmp ^ prefix)) {
+   //                  max = tmp;
+   //                  break;
+   //              }
+   //          }
+
+			if(prefixset.has(candidate ^ item)) {
+				max = candidate;
+				break;
+			}
+		}
+	}
+	return max;    
+};
+</script>

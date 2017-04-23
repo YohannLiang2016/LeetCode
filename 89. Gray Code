@@ -1,0 +1,15 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number[]}
+ * grey[i] = i ^ (i / 2)
+ */
+var grayCode = function(n) {
+    var result = [];
+    var nbit = 1 << n;
+    for(var i = 0; i < nbit; i++) {
+    	result.push(i ^ (i >> 1));
+    }
+    return result;
+};
+</script>

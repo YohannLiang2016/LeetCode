@@ -1,0 +1,23 @@
+<script type="text/javascript">
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ * 经典dp
+ */
+var uniquePaths = function(m, n) {
+	var dp = [[]];
+	for(var i = 0; i < n; i++)
+		dp[0].push(1);
+	for(var j = 1; j < m; j++) {
+		var temp = [1];
+		dp.push(temp);
+	}
+	for(var k = 1; k < m; k++){
+		for(var l = 1; l < n; l++) {
+			dp[k][l] = dp[k - 1][l] + dp[k][l - 1];
+		}
+	}
+	return dp[m-1][n-1];
+};
+</script>

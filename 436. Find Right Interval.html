@@ -1,0 +1,48 @@
+<script type="text/javascript">
+/**
+ * Definition for an interval.
+ * function Interval(start, end) {
+ *     this.start = start;
+ *     this.end = end;
+ * }
+ * 思路：
+ * 用map记录序号，然后排序+二分查找，耗时O(nlogn)
+ */
+/**
+ * @param {Interval[]} intervals
+ * @return {number[]}
+ */
+var findRightInterval = function(intervals) {
+    var map = new Map();
+    var result =[];
+    var intervalslength = intervals.length;
+    for(var i = 0; i < intervalslength; i++) {
+    	map.set(intervals[i][0], i);
+    }
+    intervals.sort(function(a, b) {
+    	return a[0] - b[0];
+    });
+    for(var j = 0; j < intervalslength; j++) {
+    var l = -1;
+    var h = intervalslength;
+    var mid;
+    var k = intervals[j][1];
+    while(l + 1 < h) {
+    	mid = Math.floor((l + h) / 2);
+    	if(intervals[mid][0] === k){
+    		h = mid;
+    		break;
+    	}
+    	if(intervals[mid][0] > k) h = mid;
+    	if(intervals[mid][0] < k) l = mid;
+    }
+    if(h === intervalslength){
+    	result[map.get(intervals[j][0])] = -1;
+    }else {
+    	result[map.get(intervals[j][0])] = map.get(intervals[h][0]);
+    }
+    }
+    return result;
+
+};
+</script>

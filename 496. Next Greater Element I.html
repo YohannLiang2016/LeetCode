@@ -1,0 +1,34 @@
+<script>
+/**
+ * @param {number[]} findNums
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var nextGreaterElement = function(findNums, nums) {
+    var findNumslength = findNums.length;
+    var numslength = nums.length;
+    var tempFindNums;
+    var aryOfnextGreaterElement = [];
+    var flag = 0;
+    var findit = 0;
+    for(var i = 0; i <findNumslength; i++) {
+    	tempFindNums = findNums[i];
+    	findit = 0;
+    	while(nums[findit++] !== tempFindNums);
+    	console.log(findit);
+    	flag = 0;
+    	for(var j = findit; j < numslength; j++) {
+    		if(tempFindNums < nums[j]){
+    			aryOfnextGreaterElement.push(nums[j]);
+    			flag = 1;
+    			break;
+    		}
+    	}
+    	if(flag === 0)
+    		aryOfnextGreaterElement.push(-1);
+    }
+    return aryOfnextGreaterElement;
+};
+console.log(nextGreaterElement([4,1,2],
+[1,3,4,2]))
+</script>

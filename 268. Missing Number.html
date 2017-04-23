@@ -1,0 +1,16 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number}
+ * 利用a*a = 0性质求解
+ */
+var missingNumber = function(nums) {
+	var numslength = nums.length;
+	var result = 0;
+    for(var i = 0; i < numslength; i++) {
+    	result ^= (nums[i] ^ i);
+    }
+    result ^= numslength;
+    return result;
+};	
+</script>

@@ -1,0 +1,80 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} height
+ * @return {number}
+ https://discuss.leetcode.com/topic/3462/yet-another-way-to-see-what-happens-in-the-o-n-algorithm
+ 很聪明的解法！
+ 我们以1 3 2 5 9 3来说明
+   1 3 2 5 9 3
+ 1   - - - - o(由于1<3所以左边的都不用算了)       
+ 3     - - - o   
+ 2       - - o 
+ 5         o o(由于3<5所以下边的都不用算了)
+ 9           -   
+ 3
+ 上面的ooooo组成的路径，最佳一定在这条路径里面           
+ */
+var maxArea = function(height) {
+	var lowPoint = 0;
+	var heightPoint = height.length-1;
+	var maxArea = 0;
+	while(lowPoint < heightPoint) {
+		maxArea = Math.max(maxArea, (heightPoint - lowPoint) * Math.min(height[lowPoint], height[heightPoint]));
+		if(height[lowPoint] <= height[heightPoint]) {
+			lowPoint++; //往下走
+		}else {
+			heightPoint--; //往左走
+		}
+	} 
+	return maxArea;
+	// 错
+	// var prei = 0;
+	// var prej = 1;
+	// var result = Math.min(height[0], height[1]);
+	// var heightLength = height.length;
+	// var secondCandidate;
+	// var thirdCandidate;
+
+	// var tempResult;
+	// var tempprei;
+	// var tempprej;
+	// for(var i = 2; i < heightLength; i++) {
+	// 	secondCandidate = Math.min(height[prei], height[i]) * (i - prei);
+	// 	thirdCandidate = Math.min(height[prej], height[i]);
+
+	// 	if(secondCandidate > thirdCandidate) {
+	// 		tempResult = secondCandidate;
+	// 		tempprei = prei;
+	// 		tempprej = i;
+	// 	}else if(secondCandidate < thirdCandidate) {
+	// 		tempResult = thirdCandidate;
+	// 		tempprei = prej;
+	// 		tempprej = i;			
+	// 	}else {
+	// 		if(Math.min(prei, i) > Math.min(prej, i)) {
+	// 			tempResult = secondCandidate;
+	// 			tempprei = prei;
+	// 			tempprej = i;				
+	// 		}else {
+	// 			tempResult = thirdCandidate;
+	// 			tempprei = prej;
+	// 			tempprej = i;					
+	// 		}
+	// 	}
+
+	// 	if(tempResult > result) {
+	// 		result = tempResult;
+	// 		prei = tempprei;
+	// 		prej = tempprej;
+	// 	}else if(tempResult === result) {
+	// 		if(Math.min(prei, prej) < Math.min(tempprei, tempprej)) {
+	// 			result = tempResult;
+	// 			prei = tempprei;
+	// 			prej = tempprej;				
+	// 		}			
+	// 	}
+	// }
+	// return result;
+
+};
+</script>

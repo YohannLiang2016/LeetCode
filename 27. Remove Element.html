@@ -1,0 +1,31 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ * 重做
+ */
+var removeElement = function(nums, val) {
+    if(nums.length === 0) return 0;
+    if(nums.length === 1 && nums[0] === val){ 
+        nums.pop();
+        return 1;
+    }
+    var l = 0;
+    var h = nums.length - 1;
+    var temp;
+    while(l < h) {
+    	while(l < h && nums[l] !== val) l++;
+    	while(l < h && nums[h] === val) h--;
+    	if(l < h) {
+    		temp = nums[l];
+    		nums[l] = nums[h];
+    		nums[h] = temp;
+    		l++;
+    		h--;
+    	}
+    }
+    if(nums[l] === val) return l;
+    return l+1;
+};
+</script>

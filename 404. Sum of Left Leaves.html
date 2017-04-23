@@ -1,0 +1,35 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+ /*思路：
+ * 关键是怎么分清是右叶子，而且在分清叶子前可能会出现的特殊情况
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ function TreeNode(val) {
+    this.val = val;
+      this.left = this.right = null;
+ }
+var sumOfLeftLeaves = function(root) {
+    if(root === null || (root.left === null && root.right === null)) return 0;
+    if(root.left === null && root.right != null) return arguments.callee(root.right);
+    if(root.left.left === null && root.left.right === null)
+    	return arguments.callee(root.right) + root.left.val;
+    return arguments.callee(root.left) + arguments.callee(root.right);
+};
+var root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = null;
+root.left.left = null;
+root.left.right = null;
+console.log(sumOfLeftLeaves(root));
+</script>
+
+Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 8 -> 0 -> 7

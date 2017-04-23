@@ -1,0 +1,31 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 后续遍历，即 根右左的相反！
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var postorderTraversal = function(root) {
+	var temp;
+	var result = [];
+	var stack = [];
+	stack.push(root);
+	while(stack.length !== 0) {
+		temp = stack.pop();
+		result.push(temp.val);
+		if(temp.left !== null) {
+			stack.push(temp.left);
+		}
+		if(temp.right !== null) {
+			stack.push(temp.right);
+		}
+	}
+	return result.reverse();
+}
+</script>

@@ -1,0 +1,29 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 佩服的五体投地
+ * pathSum:树中 连续串和等于SUM的数量
+ * dfs:一定含有root的连续串和等于sum的数量
+ * 二者关系就是dfs(root, sum) + arguments.callee(root.left, sum) + arguments.callee(root.right, sum);
+ * 一定含有root的连续串和等于sum的数量 + 不含root的左树 + 不含root的右树
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {number}
+ */
+var pathSum = function(root, sum) {
+    if(root === null) return 0;
+    return dfs(root, sum) + arguments.callee(root.left, sum) + arguments.callee(root.right, sum);
+};
+function dfs(root, num){
+    if(root === null) return 0;
+    var result = 0;
+    if(root.val === num) result++;
+    return result + dfs(root.left, num - root.val) + dfs(root.right, num - root.val);  
+}
+</script>

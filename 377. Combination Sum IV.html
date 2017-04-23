@@ -1,0 +1,37 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ * 这个应该能想出才对！！！！- -
+ * combinationsum4 是 返回目标值
+ * 内部是迭代， target减去比它少的然后迭代之和就是返回值（不可能重复，因为TARGET一减迭代的target就不同了）
+ * 值得注意的是target等于0，我们返回1，因为在target=0情况下上次的函数必定是上个target=nums[i]
+ */
+var combinationSum4 = function(nums, target) {
+    //version1 no store result,超时
+    // if(target === 0)
+    // 	return 1;
+    // var result = 0;
+    // for(var i = 0; i < nums.length; i++) {
+    // 	if(nums[i] <= target)
+    // 		result += arguments.callee(nums, target - nums[i]);
+    // }
+    // return result;
+    var ary = [1];
+    function Helper(nums, target) {
+    	if(typeof ary[target] !== 'undefined') {
+    		return ary[target];
+    	}
+	    var result = 0;
+	    for(var i = 0; i < nums.length; i++) {
+	    	if(nums[i] <= target)
+	    		result += arguments.callee(nums, target - nums[i]);
+	    }
+	    ary[target] = result;
+	    return result;
+    }
+    return Helper(nums, target);
+
+};
+</script>

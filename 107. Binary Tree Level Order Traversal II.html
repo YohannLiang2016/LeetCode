@@ -1,0 +1,45 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 遇到问题是，不妨倒过来看，之前有一题右左根，其实就是前序遍历根左右
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrderBottom = function(root) {
+	if(root === null) return [];
+    var stack = [];
+    stack.push(root);
+    var temp;
+    var nowCount = 1;
+    var nextCount = 0;
+    var arytemp = [];
+    var result = [];
+    while(stack.length !== 0) {
+    	temp = stack.shift();
+    	if(nowCount === 0) {
+    		result.push(arytemp);
+    		arytemp = [];
+    		nowCount = nextCount;
+    		nextCount = 0;
+    	}
+    	arytemp.push(temp.val);
+    	nowCount--;
+    	if(temp.left !== null) {
+    		stack.push(temp.left);
+    		nextCount++; 
+    	}
+    	if(temp.right !== null) {
+    		stack.push(temp.right);
+    		nextCount++;
+    	}
+    }
+    result.push(arytemp);
+    return result.reverse();
+};
+</script>

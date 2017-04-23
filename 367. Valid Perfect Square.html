@@ -1,0 +1,32 @@
+<script type="text/javascript">
+/**
+ * @param {number} num
+ * @return {boolean}
+ */
+var isPerfectSquare = function(num) {
+  // if(num === 0 || num === 1) return true;
+  // var halfnum = Math.floor(num / 2);
+  // for(var i = 2; i <= halfnum; i++) {
+  // 	if(i * i === num)
+  // 		return true;
+  // }
+  // return false;
+  /*
+  牛顿法 求一个数的近似xn+1 = xn + 
+  var x = num;
+  while(x * x > num) {
+  	x = (x + num/x) >> 1;
+  }
+  return x*x===num;
+	上面两种方法都是会导致超出数的表示范围
+  */
+  if(num === 1) return true;
+  var add = 3;
+  var curr = 1;
+  while(curr < num) {
+  	curr += add;
+  	add +=2;
+  }
+  return curr === num;
+};
+</script>

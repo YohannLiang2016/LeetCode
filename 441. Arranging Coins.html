@@ -1,0 +1,16 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var arrangeCoins = function(n) {
+  if(n == 0) return 0;
+  var accumulation = 1; //想清楚初始化
+  var result = 0; //初始化为0是因为第十行那里，才是算了1
+  while(accumulation <= n) { //每次都判断，当超过了的话，下一行就不算了，因为已经不够了      
+  	result++; 
+  	accumulation += (result + 1);
+  }  
+  return result;
+};
+</script>

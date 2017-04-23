@@ -1,0 +1,13 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {boolean}
+ * http://blog.csdn.net/ebowtang/article/details/50485622
+ * 推荐log10(n)/log10(3)
+ * 如果素数也推荐 max % n === 0  max = Math.pow(Math.floor(log(0x7fffffff)/log(3)), 3)
+ * max = 
+ */
+var isPowerOfThree = function(n) {
+    return n > 0 && 1162261467%n === 0;
+};
+</script>

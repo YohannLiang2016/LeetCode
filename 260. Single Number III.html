@@ -1,0 +1,37 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ * 思路：
+ * 前面代码如136的single number求出了x和y的XxorY
+ * 1、我们知道x, y是不同的，而且根据xor完之后为1的位即二者不同，即二者xor完后，至少有一位是1
+ * 2、我们用XorY & (~(XorY - 1))求出最低位的1，即最低位的不同位
+ * 3、我们把这一位设为1，其他为0，然后用它来找出x（假设x这一位为1）if(lowestOneBit & nums[j])，为什么这就能找出来呢，因为出现两次且这一位为1的数字必然会抵消。
+ * 4、同理的y，3，4就是被注释掉代码的原理
+ */
+var singleNumber = function(nums) {
+	var numslength = nums.length;
+	var XorY = 0;
+	for(var i = 0; i < numslength; i++) {
+		XorY ^= nums[i];
+	}
+	//找到最低位的1！！！！！
+	var lowestOneBit = XorY & (~(XorY - 1));
+	var x = 0;
+	for(var j = 0; j < numslength; j++) {
+		if(lowestOneBit & nums[j]) {
+			x ^= nums[j];
+		}
+	}
+	var y = x ^ XorY;
+	//上面五行代码写成下面好理解一些
+	/*
+		if(lowestOneBit & nums[j]) {
+			x ^= nums[j];
+		}else {
+			y ^= nums[j];	
+		}
+	*/
+	return [x, y];   
+};
+</script>

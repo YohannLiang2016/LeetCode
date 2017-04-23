@@ -1,0 +1,25 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} prices
+ * @return {number}
+ * 做法：
+ * 用min记录当前的最小值
+ * 用maxpro记录当前最大利润，当prices[i] - min大于其时候更新
+ */
+var maxProfit = function(prices) {
+	if(prices.length === 0 || prices.length === 1) return 0;
+	var min = prices[0];
+	var maxPro = 0;
+	var priceslength = prices.length;
+	for(var i = 1; i < priceslength; i++) {
+		if(min > prices[i]) {
+			min = prices[i];
+		}else {
+			if(maxPro < prices[i] - min) {
+				maxPro = prices[i] - min;
+			}
+		}
+	}
+	return maxPro;
+};
+</script>

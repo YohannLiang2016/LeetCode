@@ -1,0 +1,47 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ * 学到了回溯法（未必写得出）和怎么巧妙比较数组...
+ *    2: try(int i)
+   3: {
+   4:     if(i>n)
+   5:        输出结果;
+   6:      else
+   7:     {
+   8:        for(j = 下界; j <= 上界; j=j+1)  // 枚举i所有可能的路径
+   9:        {
+  10:            if(fun(j))                 // 满足限界函数和约束条件
+  11:              {
+  12:                 a[i] = j;
+  13:               ...                         // 其他操作
+  14:                 try(i+1);
+  15:               回溯前的清理工作（如a[i]置空值等）;
+  16:               }
+  17:          }
+  18:      }
+  19: }
+  * 像极了模板
+ */
+var findSubsequences = function(nums) {
+	  function helper(result, holder, index, nums) {
+	  	if(holder.length >= 2) //放入
+	  		result.add(holder.join(','));
+	  	for(var i = index; i < nums.length; i++) { //选择
+	  		if(holder.length == 0 || holder[holder.length - 1] <= nums[i]) { //前进条件
+	  			holder.push(nums[i]);
+	  			arguments.callee(result, holder, i + 1, nums);
+	  			holder.pop(); //回溯
+	  		}
+	  	}
+	  }
+	  var result = new Set();
+	  var aryresult = [];
+	  var holder = [];
+	  helper(result, holder, 0, nums);
+	  for(let item of result) {
+	  	aryresult.push(holder.split(',').map((val => Number(val))));
+	  }
+	  return aryresult;
+};
+</script>

@@ -1,0 +1,41 @@
+<script type="text/javascript">
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ * 定义四个变量
+ * 关于break有没有等于号我是这样想的，如第一个当做完这个row，rowstart++即，rowStart是没做过的，同理rowend，
+ * 当rowstart === rowend时候，都是没做过的
+ */
+var spiralOrder = function(matrix) {
+    if(matrix.length === 0) return [];
+    var colStart = 0,
+    	colEnd = matrix[0].length - 1,
+    	rowStart = 0;
+    	rowEnd = matrix.length - 1;
+    var result = [];
+    while(true) {
+    	//to right
+    	if(rowStart > rowEnd) break;
+    	for(var i = colStart; i <= colEnd; i++) {
+    		result.push(matrix[rowStart][i]);
+    	}
+    	rowStart++;
+    	if(colStart > colEnd) break;
+    	for(var j = rowStart; j <= rowEnd; j++) {
+    		result.push(matrix[j][colEnd]);
+    	}
+    	colEnd--;
+    	if(rowStart > rowEnd) break;
+    	for(var k = colEnd; k >= colStart; k--) {
+    		result.push(matrix[rowEnd][k]);
+    	}
+    	rowEnd--;
+    	if(colStart > colEnd) break;
+    	for(var l = rowEnd; l >= rowStart; l--) {
+    		result.push(matrix[l][colStart]);
+    	}
+    	colStart++;
+    } 
+    return result;  
+};
+</script>

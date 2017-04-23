@@ -1,0 +1,33 @@
+<script>
+/**
+ * @param {character[][]} board
+ * @return {number}
+ * 思路:
+ * 当一个x上、左没有X的时候，可将结果加一
+ * 备注
+ */
+var countBattleships = function(board) {
+    var outLength = board.length;
+    var inLength = 0;
+    var row = [];
+    var prerow = [];
+    var numberOfBattleships = 0;
+    for(var i = 0; outLength--; i++) {
+        if(i > 0) prerow = board[i - 1];
+        else prerow = [];
+        row = board[i];
+        inLength = row.length;
+        for(var j = 0; inLength--; j++) {
+            if(row[j] == 'X'){
+                if(prerow.length == 0 || prerow[j] != 'X') {
+                    if(j == 0 || row[j - 1] != 'X')
+                        numberOfBattleships++;
+                }
+            }
+        }
+    }
+    return numberOfBattleships;
+};
+var b = [["X",".",".","X"], [".",".",".","X"] , [".",".",".","X"]]
+console.log(countBattleships(b));
+</script>

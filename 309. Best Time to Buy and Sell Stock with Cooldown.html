@@ -1,0 +1,27 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} prices
+ * @return {number}
+ * http://www.cnblogs.com/jdneo/p/5228004.html
+ * 神奇！定义几种状态，然后状态转换写出来！
+ * 值得注意的是，这几种状态写出后是有一定的意义
+ S0 代表没有买入的状态
+ S1 代表买入后等待卖出的状态
+ S2 代表卖出后的状态
+ 所以
+ s0 初始化为0，之前都没买入
+ s1 初始化为买入0后 值prices[0]
+ s2 之前没卖出，负无穷
+ */
+var maxProfit = function(prices) {
+    var s0 = [0];
+    var s1 = [-prices[0]];
+    var s2 = [-Number.MIN_VALUE];
+    for(var i = 1; i < prices.length; i++) {
+    	s0[i] = Math.max(s0[i - 1], s2[i - 1]);
+    	s1[i] = Math.max(s0[i-1] - prices[i], s1[i-1]);
+    	s2[i] = s1[i-1] + prices[i]; 
+    }
+    return Math.max(s0[prices.length - 1], s1[prices.length - 1], s2[prices.length - 1]);
+};
+</script>
