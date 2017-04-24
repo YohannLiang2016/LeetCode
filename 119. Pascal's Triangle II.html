@@ -1,0 +1,28 @@
+<script type="text/javascript">
+/**
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+var getRow = function(rowIndex) {
+	if(rowIndex === 0) return [1];
+	var rowlength = rowIndex + 1;
+	var factorial = [1, 1];
+	for(var j = 2; j < rowlength; j++) {
+		factorial[j] = j * factorial[j - 1];  
+	}
+	var result = [];
+	result[0] = 1;
+	var rowlength_2 = Math.floor(rowIndex / 2) + 1;
+	for(var i = 1; i < rowlength_2; i++) {
+		result[i] = factorial[rowIndex] / (factorial[i] * factorial[rowIndex - i]);  
+	}
+	var flag = 0;
+	if(rowIndex % 2 === 0) {
+		flag = 1;
+	}
+	for(var k = rowlength_2, l = rowlength_2 - 1 - flag; k < rowlength; k++, l--) {
+		result[k] = result[l];
+	}
+	return result;  
+};
+</script>
