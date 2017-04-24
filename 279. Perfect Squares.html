@@ -1,0 +1,37 @@
+<script type="text/javascript">
+/**
+ * @param {number} n
+ * @return {number}
+ * 挺标准的动态规划
+ */
+var numSquares = function(n) {
+
+	//502 / 600 test cases passed.
+    // var a = [];
+    // a[0] = 0;
+    // for(var k = 1; k * k <= n; k++) {
+    // 	a[k * k] = 1; 
+    // }
+    // for(var i = 2; i <= n ; i++) {
+    // 	if(a[i] === 1) {
+    // 		continue;
+    // 	}
+    // 	a[i] = Number.MAX_VALUE;
+    // 	for(var j = 1; 2 * j <= i; j++) {
+    // 		a[i] = Math.min(a[i], a[j] + a[i - j]);
+    // 	}
+    // }
+    // return a[n];
+
+    //网上答案利用“必须有完美开方数的条件”减少次数
+    var a =[];
+    a[0] = 0;
+    for(var i = 1;i <= n; i++) {
+    	a[i] = Number.MAX_VALUE;
+    	for(var j = 1; j * j <= i; j++) {
+    		a[i] = Math.min(a[i], a[i - j*j] + 1);
+    	}
+    }
+    return a[n];
+};	
+</script>
