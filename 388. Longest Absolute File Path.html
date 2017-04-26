@@ -1,0 +1,59 @@
+<script type="text/javascript">
+/**
+ * @param {string} input
+ * @return {number}
+ * //理解中
+ */
+var lengthLongestPath = function(input) {
+	if(input === "") return 0;
+	var stack = []; //记录现在是第几层
+	var result = 0; //长度
+	var inputlength = input.length;
+	var startstr = '';
+	var i = 0;
+	var filecount = 0;
+	var isFile = false;
+	while(i < input.length) {
+		if(input[i] === '\n'){
+			break;
+		}
+		if(input[i] === '.')
+			isFile = true;
+		if(input[i] !== ' ')
+			filecount++;
+		i++;
+	}
+	if(isFile === true) return filecount;
+	stack.push(filecount);
+	filecount = 0;
+	i++; //指向下一个
+	var tcount = 0;
+	while(i < input.length) {
+		while(i < input.length && input[i] === '\t') {
+			tcount++;
+			i++;
+		}
+		while(i < input.length && input[i] !== '\n') {
+			if(input[i] === '.') {
+				isFile = true;
+			}
+			if(input[i] !== ' ')
+				filecount++;
+			i++;
+		}
+		if(isFile === true) {
+			result = Math.max(result, stack[stack.length - 1] + filecount + 1);
+		}else {
+			while(stack.length > tcount) {
+				stack.pop();
+			}
+			stack.push(stack[stack.length - 1] + filecount + 1);
+		}
+		tcount = 0;
+		filecount = 0;
+		isFile = false;
+		i++; //指向\t
+	} 
+	return result;
+};
+</script>
