@@ -1,0 +1,35 @@
+<script type="text/javascript">
+/**
+ * @param {string} preorder
+ * @return {boolean}
+ * 这题很常考，解序列化（前缀）
+ * 用栈当压入#,遇到#就弹出两次(易错点这里要检查是否为空),在压入#(易错点这里也要检查栈顶有没有#)
+ */
+var isValidSerialization = function(preorder) {
+	  var ary = preorder.split(',');
+	  var arylength = ary.length;
+	  var stack = [];
+	  var i = 1;
+	  var flag = false;
+	  stack.push(ary[0]);
+	  for(; i < arylength && stack.length > 0; i++) {
+	  	if(ary[i] === '#') {
+	  		while(stack[stack.length - 1] === '#') {
+	  			//检查是否可以pop出两个
+	  			stack.pop();
+	  			if(stack.length === 0) {
+	  				flag = true;
+	  				break;
+	  			}
+	  			stack.pop();
+	  	  	}
+	  		stack.push('#');
+	  	}else {
+	  		stack.push(ary[i]);
+	  	}
+	  }
+	  if(i === arylength && stack[0] === '#' && stack.length === 1 && !flag)
+	  	return true;
+	  return false;
+};
+</script>

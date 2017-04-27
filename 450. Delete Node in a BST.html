@@ -1,0 +1,110 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} key
+ * @return {TreeNode}
+ * 整体思想就是：
+ * 用左边最右的值代替当前值。
+ * 遗漏点：
+ * 左边最右的值很可能是
+ *     1
+      2
+     3
+ * 的2，所以1的左边不能赋空，要赋2的左
+ * 更好的答案
+ * deleteNode意义返回删除后的树根
+ * public TreeNode deleteNode(TreeNode root, int key) {
+    if(root == null){
+        return null;
+    }
+    //左右问题在这里解决
+    if(key < root.val){
+        root.left = deleteNode(root.left, key);
+    }else if(key > root.val){
+        root.right = deleteNode(root.right, key);
+    }else{
+        if(root.left == null){
+            return root.right;
+        }else if(root.right == null){
+            return root.left;
+        }
+        
+        TreeNode minNode = findMin(root.right);
+        root.val = minNode.val;
+        root.right = deleteNode(root.right, root.val); //关键的一步啊
+    }
+    return root;
+}
+
+private TreeNode findMin(TreeNode node){
+    while(node.left != null){
+        node = node.left;
+    }
+    return node;
+}
+ */
+var deleteNode = function(root, key) {
+	function findlargest(lastroot, root, isleft) {
+		if(root.right !== null) {
+			return arguments.callee(root, root.right, false);
+		}
+		var rootval = root.val;
+		if(isleft === true){
+			lastroot.left = root.left;
+		}
+		else{
+			lastroot.right = root.left;
+		}
+		return rootval;
+	}
+    function helper(lastroot, root, key, left, right) {
+    	if(root === null) return;
+    	if(root.val === key) {
+    		if(root.left !== null && root.right !== null) {
+    			root.val = findlargest(root, root.left, true);
+    			return;
+    		}
+    		if(root.left === null && root.right === null) {
+    			if(left === null)
+    				lastroot.right = null;
+    			else
+    				lastroot.left = null;
+    			return;
+    		}
+    			if(left === null)
+    				lastroot.right = root.left === null?root.right:root.left
+    			else
+    				lastroot.left = root.left === null?root.right:root.left;
+    	}else if(root.val < key) {
+    		//右
+    		arguments.callee(root, root.right, key, null, true);
+    	}else {
+    		//左
+    		arguments.callee(root, root.left, key, true, null);
+    	}
+    }
+    if(root === null) return null;
+    if(root.val === key){
+    	if(root.left === null)
+    		return root.right;
+    	if(root.left.right === null) {
+    		root.left.right = root.right;
+    		return root.left;
+    	}
+    	root.val = findlargest(root.left, root.left.right, false);
+    	return root;
+    }
+    if(root.val < key)
+        helper(root, root.right, key, null, true);
+    else
+        helper(root, root.left, key, true, null);
+    return root;
+};
+</script>
